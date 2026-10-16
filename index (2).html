@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OA Theory of Action</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Lato,'Segoe UI',Arial,sans-serif;color:#52585A;line-height:1.65;background:#fff;letter-spacing:.02em}
+body::before{content:"DRAFT";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:18vw;font-weight:900;color:rgba(0,0,0,.015);pointer-events:none;z-index:0;letter-spacing:.12em}
+
+nav{position:sticky;top:0;z-index:200;background:linear-gradient(135deg,#4F87C6,#3A6FA8);backdrop-filter:blur(10px);display:flex;align-items:center;padding:0 20px;overflow-x:auto;white-space:nowrap;border-bottom:3px solid #B2D235;flex-wrap:wrap}
+nav .br{color:#fff;font-weight:900;font-size:13px;padding:12px 12px 12px 0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.2);margin-right:8px;letter-spacing:.04em}
+nav a{color:rgba(255,255,255,.7);text-decoration:none;font-size:11px;font-weight:700;padding:12px 8px;flex-shrink:0;transition:.2s;letter-spacing:.04em}
+nav a:hover{color:#fff}
+
+/* Hamburger button - hidden on desktop */
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:10px;margin-left:auto;flex-shrink:0}
+.nav-toggle span{display:block;width:22px;height:2px;background:#fff;margin:5px 0;border-radius:2px;transition:.3s}
+.nav-links{display:contents}
+
+section{position:relative;z-index:1;overflow:hidden}
+.inner{max-width:1100px;margin:0 auto;padding:0 28px}
+.pad{padding:100px 0}.pad-sm{padding:64px 0}
+
+.bg-w{background:#fff}
+.bg-g{background:rgba(127,193,232,.08)}
+.bg-b{background:rgba(127,193,232,.12)}
+.bg-mblue{background:linear-gradient(135deg,#4F87C6,#3A6FA8);color:#fff}
+.bg-mgreen{background:linear-gradient(135deg,#217A56,#1A5F43);color:#fff}
+.bg-deep{background:linear-gradient(135deg,#2D5F8E,#3A6FA8);color:#fff}
+
+h2{font-size:32px;font-weight:900;color:#00539F;letter-spacing:-.01em;margin-bottom:8px;line-height:1.25}
+h3{font-size:20px;font-weight:700;color:#00539F;margin-bottom:8px}
+.bg-mblue h2,.bg-mgreen h2,.bg-deep h2,.bg-mblue h3,.bg-mgreen h3,.bg-deep h3{color:#fff}
+.tagline{font-size:16px;color:#52585A;margin-bottom:36px;max-width:600px;line-height:1.7}
+.bg-mblue .tagline,.bg-mgreen .tagline,.bg-deep .tagline{color:rgba(255,255,255,.7)}
+.eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#4FBC86;margin-bottom:8px}
+p{font-size:15px;line-height:1.75;color:#52585A;margin-bottom:14px}
+.bg-mblue p,.bg-mgreen p,.bg-deep p{color:rgba(255,255,255,.9)}
+
+.hero{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 28px}
+.hero h1{font-size:clamp(36px,6vw,56px);font-weight:900;letter-spacing:-.02em;margin-bottom:8px}
+.hero .hsub{font-size:18px;opacity:.75;margin-bottom:24px}
+.hero .pill{background:#4FBC86;color:#fff;font-size:10px;font-weight:700;padding:5px 16px;border-radius:20px;letter-spacing:.12em;display:inline-block;margin-bottom:20px}
+.hero .hmeta{font-size:12px;opacity:.4;margin-top:24px;letter-spacing:.03em}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+
+.icard{background:#fff;border-radius:12px;padding:30px 26px;box-shadow:0 2px 16px rgba(79,135,198,.08);transition:transform .2s,box-shadow .2s}
+.icard:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(79,135,198,.14)}
+.icard .icon{font-size:32px;margin-bottom:12px}
+.icard h3{font-size:16px;font-weight:700;color:#00539F;margin-bottom:8px}
+.icard p{font-size:14px;color:#52585A;line-height:1.6}
+.icard .link{display:inline-block;margin-top:12px;color:#4FBC86;font-weight:700;font-size:13px;text-decoration:none;border-bottom:2px solid transparent;letter-spacing:.02em}
+.icard .link:hover{border-bottom-color:#4FBC86}
+
+.divider{height:4px;background:linear-gradient(90deg,#4FBC86,#B2D235,#4F87C6);border-radius:2px}
+
+.pq{font-size:22px;font-weight:700;color:#00539F;max-width:700px;line-height:1.5;margin:0 auto;text-align:center;padding:48px 28px}
+.pq em{color:#4FBC86;font-style:normal}
+.bg-deep .pq{color:#fff}
+.bg-deep .pq em{color:#B2D235}
+
+.stat{text-align:center;padding:36px 22px}
+.stat .big{font-size:52px;font-weight:900;line-height:1;margin-bottom:6px;color:#4F87C6}
+.stat .big.green{color:#4FBC86}.stat .big.orange{color:#E9992F}
+.stat .label{font-size:14px;font-weight:700;color:#00539F;margin-bottom:8px}
+.stat .desc{font-size:13px;color:#52585A;line-height:1.55}
+
+.pbar{margin-bottom:16px}
+.pbar .pbar-label{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:5px;color:#52585A;letter-spacing:.02em}
+.pbar .pbar-track{height:10px;background:rgba(127,193,232,.15);border-radius:5px;overflow:hidden}
+.pbar .pbar-fill{height:100%;border-radius:5px}
+
+.chk{list-style:none;padding:0;font-size:14.5px;letter-spacing:.02em}
+.chk li{padding:8px 0;display:flex;gap:10px;align-items:flex-start}
+.ci-g{color:#4FBC86;font-weight:800}.ci-r{color:#DF4E51;font-weight:800}
+
+.tier-stairs{display:flex;align-items:flex-end;gap:8px;margin:36px 0;min-height:300px}
+.stair-wrap{flex:1;display:flex;flex-direction:column;align-items:stretch;text-align:center;transition:transform .2s}
+.stair-wrap:hover{transform:translateY(-4px)}
+.stair-label{padding:0 6px 10px;display:flex;flex-direction:column;align-items:center}
+.stair-label .s-ltr{font-size:32px;font-weight:900;line-height:1;margin-bottom:2px}
+.stair-label .s-nm{font-size:12px;font-weight:700;line-height:1.3}
+.stair-bar{border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:center;padding:14px 10px}
+.stair-bar .s-desc{font-size:12.5px;line-height:1.45;opacity:.85}
+.sb-a{background:#7CC1E8;color:#000;height:70px}
+.sb-b{background:#4F87C6;color:#000;height:110px}
+.sb-c{background:#4FBC86;color:#000;height:155px}
+.sb-d{background:#D4AF37;color:#000;height:200px}
+.sb-e{background:#4D4F51;color:#fff;height:245px}
+.stair-label .sl-a{color:#4F87C6}
+.stair-label .sl-b{color:#3A6FA8}
+.stair-label .sl-c{color:#3A9E6D}
+.stair-label .sl-d{color:#B8972E}
+.stair-label .sl-e{color:#4D4F51}
+
+.pipe{display:flex;align-items:stretch;gap:0;margin:36px 0;flex-wrap:wrap}
+.pipe-step{flex:1;min-width:180px;padding:28px 16px;text-align:center}
+.pipe-step .p-icon{font-size:28px;margin-bottom:8px}
+.pipe-step .p-plain{font-size:15px;font-weight:800;margin-bottom:2px}
+.pipe-step .p-official{font-size:11px;font-style:italic;opacity:.8;margin-bottom:8px;letter-spacing:.03em}
+.pipe-step .p-desc{font-size:11.5px;opacity:1;line-height:1.5}
+.pipe-arr{display:flex;align-items:center;font-size:28px;opacity:.7;padding:0 2px;color:#fff}
+.p1{background:rgba(255,255,255,.25);border-radius:12px 0 0 12px}
+.p2{background:rgba(255,255,255,.20)}
+.p3{background:rgba(255,255,255,.15)}
+.p4{background:rgba(255,255,255,.10);border-radius:0 12px 12px 0}
+
+.htl{display:flex;gap:0;margin:28px 0 20px;position:relative}
+.htl::before{content:"";position:absolute;top:28px;left:0;right:0;height:3px;background:rgba(79,188,134,.25);z-index:0}
+.htl-step{flex:1;text-align:center;position:relative;z-index:1;padding:0 4px}
+.htl-step .dot{width:18px;height:18px;background:#4FBC86;border-radius:50%;margin:18px auto 10px;border:3px solid #fff;box-shadow:0 0 0 2px #4FBC86}
+.htl-step .htl-num{font-size:10px;font-weight:800;color:#4FBC86;letter-spacing:.08em}
+.htl-step .htl-title{font-size:11px;font-weight:700;color:#00539F;margin:2px 0}
+.htl-step .htl-date{font-size:10px;color:#52585A;opacity:.6}
+
+.val-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:24px}
+.val-card{background:#fff;border-radius:12px;padding:22px;box-shadow:0 1px 10px rgba(79,135,198,.06);border-left:4px solid #4FBC86;position:relative}
+.val-card .val-num{position:absolute;top:14px;right:16px;font-size:28px;font-weight:900;color:rgba(79,188,134,.12)}
+.val-card .val-when{font-size:10px;font-weight:700;color:#4FBC86;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.val-card h4{font-size:14px;font-weight:700;color:#00539F;margin-bottom:4px}
+.val-card .val-who{font-size:12px;color:#4FBC86;font-weight:600;margin-bottom:8px}
+.val-card p{font-size:12.5px;color:#52585A;line-height:1.55;margin:0}
+.val-card.final{border-left-color:#B2D235;background:rgba(178,210,53,.06)}
+
+.barrier{display:flex;gap:0;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(79,135,198,.06);margin-bottom:16px}
+.barrier .b-left{background:rgba(223,78,81,.06);padding:22px;flex:1;min-width:200px}
+.barrier .b-right{background:rgba(79,188,134,.06);padding:22px;flex:1;min-width:200px}
+.barrier h4{font-size:13px;font-weight:700;color:#00539F;margin-bottom:6px}
+.barrier p{font-size:13px;line-height:1.55;color:#52585A}
+.barrier .b-icon{font-size:20px;margin-bottom:6px}
+
+.sup-visual{display:flex;gap:6px;margin:32px 0}
+.sup-card{flex:1;border-radius:12px;padding:28px 20px;text-align:center;color:#fff}
+.sup-card .sup-icon{font-size:32px;margin-bottom:10px}
+.sup-card h3{font-size:15px;margin-bottom:4px;color:#fff}
+.sup-card .sup-tier{font-size:11px;opacity:.7;margin-bottom:10px;font-weight:600;letter-spacing:.04em}
+.sup-card p{font-size:12.5px;opacity:.9;line-height:1.55;color:#fff}
+.sup-1{background:linear-gradient(135deg,#4FBC86,#3A9E6D)}
+.sup-2{background:linear-gradient(135deg,#4F87C6,#3A6FA8)}
+.sup-3{background:linear-gradient(135deg,#E9992F,#D4841A)}
+
+.del{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.del .d{background:#fff;border-radius:12px;padding:22px;text-align:center;box-shadow:0 1px 10px rgba(79,135,198,.06);border-top:4px solid #4FBC86}
+.del .d .d-icon{font-size:28px;margin-bottom:8px}
+.del .d h4{font-size:13px;font-weight:700;color:#00539F;margin-bottom:4px}
+.del .d p{font-size:11.5px;color:#52585A}
+.del .d.blue{border-top-color:#4F87C6}.del .d.lime{border-top-color:#B2D235}
+.del .d.purple{border-top-color:#A95678}.del .d.orange{border-top-color:#E9992F}
+
+.ask-row{display:flex;gap:20px;margin-top:32px}
+.ask-card{flex:1;background:rgba(255,255,255,.08);border-radius:12px;padding:28px;border:1px solid rgba(255,255,255,.12)}
+.ask-card .ask-num{font-size:36px;font-weight:900;color:#B2D235;margin-bottom:8px}
+.ask-card h3{font-size:15px;margin-bottom:8px;color:#fff}
+.ask-card p{font-size:13px;opacity:.8;line-height:1.55}
+
+footer{text-align:center;padding:28px;font-size:11px;color:#52585A;opacity:.5;border-top:1px solid rgba(127,193,232,.2);letter-spacing:.03em}
+
+/* ==========================================
+   MOBILE RESPONSIVE STYLES
+   ========================================== */
+
+/* Tablet and below: ≤ 800px */
+@media(max-width:800px){
+  .g2,.g3,.val-grid,.ask-row,.sup-visual,.del{grid-template-columns:1fr;flex-direction:column}
+  .pipe{flex-direction:column}
+  .pipe-arr{transform:rotate(90deg);padding:4px 0;justify-content:center}
+  .htl{flex-wrap:wrap;gap:12px;justify-content:center}
+  .htl::before{display:none}
+  .tier-stairs{flex-direction:column;align-items:stretch;min-height:auto}
+
+  /* Hamburger nav for mobile */
+  .nav-toggle{display:flex;flex-direction:column;justify-content:center}
+  .nav-links{display:none;width:100%;order:3;flex-basis:100%;padding:8px 0 12px}
+  .nav-links.open{display:flex;flex-wrap:wrap;gap:0}
+  .nav-links a{flex-shrink:1;white-space:normal;padding:10px 14px;font-size:12px;width:50%}
+  nav{flex-wrap:wrap}
+  nav .br{border-right:none;margin-right:0;flex:1}
+
+  /* Hero adjustments */
+  .hero{min-height:60vh;padding:60px 20px}
+  .hero h1{font-size:clamp(26px,7vw,40px)}
+  .hero .hsub{font-size:15px}
+
+  /* Padding reductions */
+  .pad{padding:64px 0}
+  .pad-sm{padding:40px 0}
+  .inner{padding:0 20px}
+
+  /* Font size reductions */
+  h2{font-size:26px}
+  h3{font-size:18px}
+  .pq{font-size:18px;padding:32px 20px}
+  .stat .big{font-size:40px}
+
+  /* Tier stairs: stack vertically with consistent sizing */
+.stair-wrap{flex-direction:row;align-items:center}
+.stair-label{flex-direction:row;gap:8px;padding:0 0 0 12px;min-width:120px}
+.stair-label .s-ltr{font-size:26px}
+.stair-bar{height:auto!important;border-radius:12px;padding:14px 16px;flex:1}
+.stair-bar .s-desc{font-size:11.5px}
+
+  /* Pipeline steps */
+  .p1,.p4{border-radius:12px}
+  .p2,.p3{border-radius:12px}
+  .pipe-step{min-width:auto;padding:22px 16px}
+
+  /* Barrier cards: stack vertically */
+  .barrier{flex-direction:column}
+  .barrier .b-left,.barrier .b-right{min-width:auto}
+
+  /* Support cards: stack */
+  .sup-visual{flex-direction:column;gap:12px}
+
+  /* Ask row: stack */
+  .ask-row{flex-direction:column;gap:14px}
+
+  /* Deliverables: 2 columns */
+  .del{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Small mobile: ≤ 600px */
+@media(max-width:600px){
+  .hero{min-height:50vh;padding:48px 16px}
+  .hero h1{font-size:clamp(22px,7vw,32px)}
+  .hero .hsub{font-size:14px}
+
+  .pad{padding:48px 0}
+  .pad-sm{padding:32px 0}
+  .inner{padding:0 16px}
+
+  h2{font-size:22px}
+  h3{font-size:16px}
+  .pq{font-size:16px;padding:28px 16px}
+  .stat .big{font-size:34px}
+
+  .icard{padding:22px 18px}
+  .icard .icon{font-size:26px}
+
+  /* Deliverables: single column */
+  .del{grid-template-columns:1fr}
+
+  /* Nav links: single column */
+  .nav-links a{width:100%;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+
+  /* Val grid: ensure single column */
+  .val-grid{grid-template-columns:1fr}
+
+  /* Timeline horizontal scroll */
+  .htl{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:0;padding-bottom:8px;justify-content:flex-start}
+  .htl::before{display:none}
+  .htl-step{min-width:100px;flex-shrink:0}
+
+  /* Ask cards */
+  .ask-card{padding:20px}
+  .ask-card .ask-num{font-size:28px}
+
+  /* Support cards padding */
+  .sup-card{padding:20px 16px}
+}
+
+/* Extra small mobile: ≤ 400px */
+@media(max-width:400px){
+  .hero{padding:36px 12px}
+  .hero h1{font-size:clamp(20px,6vw,28px)}
+
+  .inner{padding:0 12px}
+  h2{font-size:20px}
+  .pq{font-size:15px;padding:24px 12px}
+  .stat .big{font-size:28px}
+
+  nav .br{font-size:11px;padding:10px 8px 10px 0}
+  .nav-toggle span{width:18px}
+
+  .icard{padding:18px 14px}
+.stair-label .s-ltr{font-size:22px}
+.stair-label{min-width:90px;padding:0 0 0 8px}
+}
+/* ==========================================
+   ADOPTION FLOW GRID
+   ========================================== */
+.af-grid{display:grid;grid-template-columns:140px 1fr 1fr 1fr 1fr 140px;gap:4px;margin-top:28px}
+.af-hdr{background:#00539F;color:#fff;text-align:center;padding:10px 6px;border-radius:8px 8px 0 0;font-size:11px;font-weight:700;line-height:1.3}
+.af-hdr .af-icon{font-size:20px;display:block;margin-bottom:2px}
+.af-corner,.af-dest-hdr{background:#00539F;color:#fff;text-align:center;padding:10px 6px;border-radius:8px 8px 0 0;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.af-tier{border-radius:8px 0 0 8px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;text-align:center;line-height:1.3}
+.af-tier .af-ltr{font-size:1.3rem;font-weight:900;margin-bottom:2px}
+.af-t-a{background:#4F87C6}
+.af-t-b{background:#3A6FA8}
+.af-t-c{background:#4FBC86}
+.af-t-d{background:linear-gradient(135deg,#C8A415,#F5E6A3);color:#5A4800}
+.af-t-e{background:#4D4F51}
+.af-cell{padding:10px;border-radius:6px;font-size:12px;line-height:1.5;position:relative}
+.af-cell.active{background:#fff;border:1.5px solid #D0DCE8;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.af-cell.active::after{content:'›';position:absolute;right:-9px;top:50%;transform:translateY(-50%);font-size:1.4rem;color:#4FBC86;font-weight:700;z-index:2}
+.af-cell.active.last-active::after{display:none}
+.af-cell.inactive{background:#f0f2f4;border:1.5px dashed #D0DCE8;display:flex;align-items:center;justify-content:center;color:#B0BEC5;font-style:italic;font-size:11px}
+.af-cell ul{list-style:none;padding:0;margin:0}
+.af-cell li{margin-bottom:4px;padding-left:14px;position:relative;font-size:11px;color:#52585A;line-height:1.5}
+.af-cell li::before{content:'▸';color:#4FBC86;position:absolute;left:0;font-weight:bold}
+.af-dest{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px;border-radius:0 8px 8px 0;background:#fafbfc;border:1.5px solid #D0DCE8}
+.af-badge{padding:6px 10px;border-radius:20px;font-size:10px;font-weight:700;text-align:center;width:100%;line-height:1.3}
+.af-badge.gold{background:linear-gradient(135deg,#F5E6A3,#C8A415);color:#5A4800}
+.af-badge.plat{background:linear-gradient(135deg,#CFD8DC,#8C9DAB);color:#2C3E50}
+.af-badge.champ{background:#333;color:#C8A415}
+.af-tl{width:100%;border-collapse:collapse;margin-top:28px;font-size:13px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.07)}
+.af-tl th{background:#00539F;color:#fff;padding:10px 16px;text-align:left;font-size:12px}
+.af-tl td{padding:10px 16px;border-bottom:1px solid #E8ECF0;font-size:13px}
+.af-tl tr:hover{background:#F8FAFE}
+.af-tl tr:last-child td{border-bottom:none}
+.af-how{background:#E8F0FE;border-left:4px solid #4FBC86;padding:14px 18px;border-radius:6px;margin-bottom:8px;font-size:13px;line-height:1.55;color:#333}
+@media(max-width:900px){
+  .af-grid{grid-template-columns:1fr}
+  .af-tier{border-radius:8px 8px 0 0}
+  .af-dest{border-radius:0 0 8px 8px}
+  .af-cell.active::after{display:none}
+}
+</style></head><body>
+
+<nav>
+<span class="br">OA Theory of Action</span>
+<button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+<span></span><span></span><span></span>
+</button>
+<div class="nav-links">
+<a href="#challenge">Challenge</a><a href="#data">Data</a><a href="#gap">Gap</a><a href="#solution">Solution</a>
+<a href="#tiers">Tiers</a><a href="#logic">Causal Logic</a><a href="#views">Views</a><a href="#barriers">Barriers</a>
+<a href="#support">Support</a><a href="#adoptionflow">Adoption Flow</a><a href="#deliver">Deliver</a><a href="#process">Process</a><a href="#impact">Impact</a><a href="#ask">Ask</a><a href="#logicmodel">Logic Model</a>
+</div>
+</nav>
+
+<section class="bg-mblue hero">
+<div class="pill">DRAFT — MAY 2026</div>
+<h1>Goodwill Opportunity Accelerator® (OA)<br>Theory of Action</h1>
+<div class="hsub">A Clear Path to Consistent, High-Quality Career Services in Every Community</div>
+<div class="hmeta">Goodwill Industries International</div>
+</section>
+
+<section class="bg-w"><div class="pq">Together, we've built <em>a shared vision</em>. Now we need to build <em>the path</em> — so every person who walks through a Goodwill door gets the support they need to launch a career, achieve stability and keep growing.</div></section>
+<div class="divider"></div>
+
+<section class="bg-g pad" id="challenge"><div class="inner">
+<div class="eyebrow">The Challenge</div>
+<h2>150+ organizations. No standard path.</h2>
+<div class="tagline">Quality depends too much on which door someone walks through. The OA was designed to change that.</div>
+<div class="g2">
+<div class="icard"><div class="icon">🏘️</div><h3>Unequal Access</h3><p>Organizations with the most resources provide the most. Communities with the greatest need often have the fewest tools. There is no standard of services across the network.</p></div>
+<div class="icard"><div class="icon">🚧</div><h3>The Real Barriers</h3><ul>
+   <li><b>Staff Capacity.</b> Staff wear too many hats. Career Navigators are pulled into data entry, outreach and training — leaving less time for the people they serve.</li>
+<li><b>Organizational Systems.</b> Without consistent intake processes, assessment tools and data tracking, organizations can't see what's working or where people are falling through the cracks.</li>
+<li><b>Change Management.</b> Moving from informal practices to a structured model takes time, clarity and support. Organizations need to know exactly what to change, in what order and who owns each part.</li>
+</ul></div>
+</div>
+</div></section>
+
+<section class="bg-w pad" id="data"><div class="inner">
+<div class="eyebrow">March 2026 Survey</div>
+<h2>What the data told us</h2>
+<div class="tagline">114 organizations · 77% response rate</div>
+<div class="g3">
+<div class="icard stat"><div class="big">48</div><div class="label">Organizations are closer than they think</div><div class="desc">They scored higher on actual implementation than their own self-assessment — meaning the path forward may be shorter than they realize.</div></div>
+<div class="icard stat"><div class="big orange">50–75%</div><div class="label">Cite role clarity as the top barrier</div><div class="desc">Across every tier — including Gold and Platinum. Not resistance. Structure.</div></div>
+</div>
+<div style="margin-top:40px">
+<div class="eyebrow" style="margin-bottom:14px">Adoption range across the 25 service areas</div>
+<div class="pbar"><div class="pbar-label"><span>Wraparound Support</span><span style="color:#4FBC86">92%</span></div><div class="pbar-track"><div class="pbar-fill" style="width:92%;background:#4FBC86"></div></div></div>
+<div class="pbar"><div class="pbar-label"><span>Job Search &amp; Prep</span><span style="color:#4FBC86">92%</span></div><div class="pbar-track"><div class="pbar-fill" style="width:92%;background:#4FBC86"></div></div></div>
+<div class="pbar"><div class="pbar-label"><span>Registration &amp; Intake</span><span style="color:#4FBC86">90%</span></div><div class="pbar-track"><div class="pbar-fill" style="width:90%;background:#4FBC86"></div></div></div>
+<div class="pbar"><div class="pbar-label"><span>Job Placement</span><span style="color:#4F87C6">84%</span></div><div class="pbar-track"><div class="pbar-fill" style="width:84%;background:#4F87C6"></div></div></div>
+<div class="pbar"><div class="pbar-label"><span>Retention Services</span><span style="color:#4F87C6">69%</span></div><div class="pbar-track"><div class="pbar-fill" style="width:69%;background:#4F87C6"></div></div></div>
+<div class="pbar"><div class="pbar-label"><span>Career Readiness Assessment</span><span style="color:#E9992F">46%</span></div><div class="pbar-track"><div class="pbar-fill" style="width:46%;background:#E9992F"></div></div></div>
+<div class="pbar"><div class="pbar-label"><span>Digital Skills Assessment</span><span style="color:#E9992F">28%</span></div><div class="pbar-track"><div class="pbar-fill" style="width:28%;background:#E9992F"></div></div></div>
+<div class="pbar"><div class="pbar-label"><span>Referral Technology (ART)</span><span style="color:#DF4E51">25%</span></div><div class="pbar-track"><div class="pbar-fill" style="width:25%;background:#DF4E51"></div></div></div>
+<div class="pbar"><div class="pbar-label"><span>Alumni Engagement</span><span style="color:#DF4E51">12%</span></div><div class="pbar-track"><div class="pbar-fill" style="width:12%;background:#DF4E51"></div></div></div>
+</div>
+<p style="font-size:12px;color:#000000;opacity:.6;margin-top:14px;text-align:center">High adoption = clear standards and familiar work. Low adoption = capacity and tech gaps. The pattern is consistent.</p>
+</div></section>
+
+<section class="bg-b pad-sm" id="gap"><div class="inner">
+<div class="g2" style="align-items:stretch">
+<div class="icard" style="border-left:5px solid #4FBC86">
+<div class="eyebrow" style="color:#4FBC86">What exists today</div>
+<ul class="chk">
+<li><span class="ci-g">&#10003;</span> 25 service areas with Gold and Platinum criteria</li>
+<li><span class="ci-g">&#10003;</span> Logic model connecting activities to outcomes</li>
+<li><span class="ci-g">&#10003;</span> Fidelity monitoring tools</li>
+<li><span class="ci-g">&#10003;</span> Network-wide survey (77% response)</li>
+<li><span class="ci-g">&#10003;</span> Five-tier adoption structure from survey data</li>
+</ul>
+</div>
+<div class="icard" style="border-left:5px solid #DF4E51">
+<div class="eyebrow" style="color:#DF4E51">What's missing</div>
+<ul class="chk">
+<li><span class="ci-r">&#10007;</span> Step-by-step progression roadmap</li>
+<li><span class="ci-r">&#10007;</span> Role clarity — who owns what</li>
+<li><span class="ci-r">&#10007;</span> Support matched to each org's stage</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section class="bg-deep"><div class="pq">The Theory of Action fills the gap — turning <em>what we've built</em> into <em>a path organizations can actually follow.</em></div></section>
+
+<section class="bg-w pad" id="solution"><div class="inner">
+<div class="eyebrow">The Solution</div>
+<h2>Three questions. One system.</h2>
+<div class="g3" style="margin-top:28px">
+<div class="icard" style="text-align:center;border-top:4px solid #4F87C6"><div class="icon">📍</div><h3>Where are we?</h3><p>Five data-driven tiers show exactly where each organization stands.</p></div>
+<div class="icard" style="text-align:center;border-top:4px solid #4FBC86"><div class="icon">🗺️</div><h3>What's next?</h3><p>Progression descriptions for every service area and every tier.</p></div>
+<div class="icard" style="text-align:center;border-top:4px solid #E9992F"><div class="icon">👤</div><h3>Who's responsible?</h3><p>Role crosswalk and eight role guides for every functional position.</p></div>
+</div>
+</div></section>
+
+<section class="bg-g pad" id="tiers"><div class="inner">
+<div class="eyebrow">Adoption Tiers</div>
+<h2>Five stages. Data-driven.</h2>
+<div class="tagline">Derived from the March 2026 survey</div>
+<div class="tier-stairs">
+
+<div class="stair-wrap">
+  <div class="stair-label">
+    <span class="s-ltr sl-a">A</span>
+    <span class="s-nm sl-a">Prospective<br>(Non-adopters)</span>
+  </div>
+  <div class="stair-bar sb-a">
+    <span class="s-desc">Limited mission programming and has not expressed interest in OA</span>
+  </div>
+</div>
+
+<div class="stair-wrap">
+  <div class="stair-label">
+    <span class="s-ltr sl-b">B</span>
+    <span class="s-nm sl-b">Exploring<br>(Partial adopters)</span>
+  </div>
+  <div class="stair-bar sb-b">
+    <span class="s-desc">Has started to implement aspects of OA into mission programs</span>
+  </div>
+</div>
+
+<div class="stair-wrap">
+  <div class="stair-label">
+    <span class="s-ltr sl-c">C</span>
+    <span class="s-nm sl-c">Progressing<br>(Partial adopters)</span>
+  </div>
+  <div class="stair-bar sb-c">
+    <span class="s-desc">Partial OA adopter with key gaps and concerns to be addressed</span>
+  </div>
+</div>
+
+<div class="stair-wrap">
+  <div class="stair-label">
+    <span class="s-ltr sl-d">D</span>
+    <span class="s-nm sl-d">Ready<br>(Gold ★)</span>
+  </div>
+  <div class="stair-bar sb-d">
+    <span class="s-desc">Is close to or on par with OA Gold criteria</span>
+  </div>
+</div>
+
+<div class="stair-wrap">
+  <div class="stair-label">
+    <span class="s-ltr sl-e">E</span>
+    <span class="s-nm sl-e">Exemplary<br>(Platinum ★★)</span>
+  </div>
+  <div class="stair-bar sb-e">
+    <span class="s-desc">Is close to or on par with OA Platinum; true champions of OA</span>
+  </div>
+</div>
+
+</div>
+<p style="font-size:13px;color:#52585A;text-align:center;margin-top:14px"><strong>Why five instead of four?</strong> 54% of the network fell into one "Partial Adopter" category — hiding two very different populations. Splitting them unlocks targeted support.</p>
+</div></section>
+
+<section class="bg-mgreen pad" id="logic"><div class="inner">
+<div class="eyebrow" style="color:rgba(255,255,255,.5)">Causal Logic</div>
+<h2>If → Then → Then → Outcomes</h2>
+<div class="pipe">
+<div class="pipe-step p1">
+<div class="p-icon">🏗️</div>
+<div class="p-plain">Organizational Prep</div>
+<div class="p-official">Build Your Foundation</div>
+<div class="p-desc"><strong>If</strong> organizations build the foundation — trained staff, clear roles, strong partnerships, and data systems<br><strong>→ Then</strong> they can effectively meet people where they are and start the right plan</div>
+</div>
+<div class="pipe-arr">→</div>
+<div class="pipe-step p2">
+<div class="p-icon">🔍</div>
+<div class="p-plain">Phase 1: Assess & Plan</div>
+<div class="p-official">Meet People Where They Are</div>
+<div class="p-desc"><strong>If</strong> organizations recruit intentionally, understand each person through intake and assessments, and create an individualized plan (ICFP)<br><strong>→ Then</strong> they know exactly what each person needs — and can deliver the right services in the right order</div>
+</div>
+<div class="pipe-arr">→</div>
+<div class="pipe-step p3">
+<div class="p-icon">📚</div>
+<div class="p-plain">Phase 2: Equip & Connect</div>
+<div class="p-official">Deliver the Right Services</div>
+<div class="p-desc"><strong>If</strong> organizations remove barriers, build skills, provide training aligned to real jobs, and prepare people for job search<br><strong>→ Then</strong> people are not just trained — they are ready to enter and succeed in the workforce</div>
+</div>
+<div class="pipe-arr">→</div>
+<div class="pipe-step p4">
+<div class="p-icon">🚀</div>
+<div class="p-plain">Phase 3: Launch & Evaluate</div>
+<div class="p-official">Launch Careers, Stay Connected</div>
+<div class="p-desc"><strong>If</strong> organizations connect people to living-wage jobs, support them through retention, and stay connected through alumni engagement<br><strong>→ Then</strong> employment becomes long-term stability and career growth — not just placement</div>
+</div>
+</div>
+<div style="text-align:center;margin-top:28px;padding:18px;background:rgba(255,255,255,.1);border-radius:12px;font-size:15px;font-weight:700">
+LEADING TO: Enhanced Employment · Career Advancement · Economic Mobility · Financial Stability
+</div>
+<p style="text-align:center;font-size:12px;opacity:.55;margin-top:12px">This logic works in reverse — if outcomes break down, trace back to find where. MDRC will help validate which links carry the most weight.</p>
+</div></section>
+
+<section class="bg-w pad" id="views"><div class="inner">
+<div class="eyebrow">Three Views</div>
+<h2>Same system. Different lenses.</h2>
+<div class="tagline">Clarity looks different at every level.</div>
+<div class="g3">
+<div class="icard" style="border-top:5px solid #4F87C6"><div class="icon">🏛️</div><h3>Executive Overview</h3><p style="font-size:12px;color:#52585A;opacity:.6;margin-bottom:8px">CEOs · Funders · Board</p><p>Four components across five tiers. Plain language. Big picture in two minutes.</p><a href="https://sandra-smart.github.io/OA-Theory-of-Change-5-adoption-tiers/Executive-Overview.html" target="_blank" class="link">→ Open Executive Overview</a></div>
+<div class="icard" style="border-top:5px solid #4FBC86"><div class="icon">📋</div><h3>Full Detail Deep Dive</h3><p style="font-size:12px;color:#52585A;opacity:.6;margin-bottom:8px">Program Directors · GII · MDRC</p><p>25 service areas across five tiers. Complete operational picture.</p><a href="https://sandra-smart.github.io/OA-Theory-of-Change-5-adoption-tiers/Full-Detail.html" target="_blank" class="link">→ Open Full Detail</a></div>
+<div class="icard" style="border-top:5px solid #E9992F"><div class="icon">👤</div><h3>Role-Based Guides</h3><p style="font-size:12px;color:#52585A;opacity:.6;margin-bottom:8px">Frontline Staff · All eight roles</p><p>Only your areas. What you own, support and are informed on.</p><a href="https://sandra-smart.github.io/OA-Theory-of-Change-5-adoption-tiers/Role-Guide-CN.html" target="_blank" class="link">→ Open Career Navigator Guide</a></div>
+</div>
+</div></section>
+
+<section class="bg-g pad-sm" id="barriers"><div class="inner">
+<div class="eyebrow">Barrier → Solution</div>
+<h2>Every element traces to real data.</h2>
+<div style="margin-top:28px">
+<div class="barrier"><div class="b-left"><div class="b-icon">🚫</div><h4>Role Clarity — 50–75%</h4><p>Staff wear multiple hats with no clear ownership.</p></div><div class="b-right"><div class="b-icon">✅</div><h4>Role Crosswalk + Eight Guides</h4><p>25 areas mapped to eight roles. Every person knows what's theirs.</p></div></div>
+<div class="barrier"><div class="b-left"><div class="b-icon">🚫</div><h4>Don't Know Where They Stand</h4><p>48 orgs are closer than they think.</p></div><div class="b-right"><div class="b-icon">✅</div><h4>Five Tiers + Self-Assessment</h4><p>Data-driven position and next step for every service area.</p></div></div>
+<div class="barrier"><div class="b-left"><div class="b-icon">🚫</div><h4>Too Complex for Leaders</h4><p>25 service areas overwhelm strategic thinkers.</p></div><div class="b-right"><div class="b-icon">✅</div><h4>Three Views at Three Levels</h4><p>CEO gets four components. Staff gets just their areas.</p></div></div>
+</div>
+</div></section>
+
+<section class="bg-w pad" id="support"><div class="inner">
+<div class="eyebrow">GII Support Model</div>
+<h2>Matched to where Goodwill organizations are.</h2>
+<div class="sup-visual">
+<div class="sup-card sup-1"><div class="sup-icon">🌱</div><h3>Self-Directed</h3><div class="sup-tier">Tiers A–B</div><p style="text-align:left;font-size:11.5px;opacity:.9;margin:0"><span style="display:block;margin-bottom:6px"><strong>At their own pace with GII-provided tools.</strong></span>• OA Landing Page on Goodwill Exchange<br>• OA Readiness Assessment<br>• OA Logic Model and Fidelity Index<br>• Draft an OA Action Plan independently<br>• OA Learning Events and OA Fellows</p></div>
+<div class="sup-card sup-2"><div class="sup-icon">🤝</div><h3>Group Advisory</h3><div class="sup-tier">Tiers B–C</div><p style="text-align:left;font-size:11.5px;opacity:.9;margin:0"><span style="display:block;margin-bottom:6px"><strong>Structured guidance with built-in accountability.</strong></span>• 2-month advisory consultation focused on closing key gaps<br>• OA Action Plan with clear next steps and follow-up cadence</p></div>
+<div class="sup-card sup-3"><div class="sup-icon">🎯</div><h3>Individualized</h3><div class="sup-tier">Tiers C–E</div><p style="text-align:left;font-size:11.5px;opacity:.9;margin:0"><span style="display:block;margin-bottom:6px"><strong>Hands-on partnership tailored to their organization.</strong></span>• 4–6 month mission consultation for organization-specific gaps<br>• Fidelity Monitoring to validate Gold or Platinum certification<br>• OA Action Plan with clear next steps and follow-up cadence</p></div>
+</div>
+
+<div style="margin-top:48px">
+<div class="eyebrow" style="text-align:center">How Organizations Connect to Support</div>
+<h3 style="text-align:center;margin-bottom:28px">Three steps from first contact to the right level of help.</h3>
+<div class="g3">
+<div class="icard" style="text-align:center;border-top:4px solid #4FBC86"><div class="icon">📧</div><h3>Step 1: Pre-Engagement</h3><p>Email outreach with OA success stories and real data. Discovery webinars. OA Fellows invitations. CEO and mission leader engagement.</p></div>
+<div class="icard" style="text-align:center;border-top:4px solid #4F87C6"><div class="icon">📊</div><h3>Step 2: Discovery Call</h3><p>Review an adoption dashboard built from survey data. Understand current programming. Identify areas meeting OA requirements and key gaps. Prioritize and create an initial action plan.</p></div>
+<div class="icard" style="text-align:center;border-top:4px solid #E9992F"><div class="icon">🤝</div><h3>Step 3: Match to Support</h3><p>Based on the discovery call, connect the organization to the right level of GII support — self-directed, group advisory or individualized consultation.</p></div>
+</div>
+</div>
+</div></section>
+
+<!-- ============ ADOPTION FLOW SECTION ============ -->
+<section class="bg-b pad" id="adoptionflow"><div class="inner">
+<div class="eyebrow">Adoption Process Flow</div>
+<h2>How GII Supports Members — Phase by Phase</h2>
+<div class="tagline">Every organization follows the same phases — they just enter at different points. Find the current tier on the left and follow across.</div>
+<div class="af-how"><strong>How to read:</strong> Active cells (white) show what GII delivers at that phase. Inactive cells (gray) mean the organization has already passed that stage. Arrows connect the phases. All pathways lead to OA Gold, OA Platinum, or an ongoing OA Champion role.</div>
+
+<div class="af-grid">
+<!-- Header Row -->
+<div class="af-corner">Current OA<br>Adoption Tier</div>
+<div class="af-hdr"><span class="af-icon">📋</span>Phase 1<br>Gain understanding<br>&amp; buy-in</div>
+<div class="af-hdr"><span class="af-icon">🎯</span>Phase 2<br>Develop urgency &amp;<br>spark motivation</div>
+<div class="af-hdr"><span class="af-icon">🔍</span>Phase 3<br>Discovery &amp;<br>action planning</div>
+<div class="af-hdr"><span class="af-icon">✅</span>Phase 4<br>Implementation<br>&amp; evaluation</div>
+<div class="af-dest-hdr">Desired Future<br>OA Tier</div>
+
+<!-- ROW A: Prospective (Non-Adopter) -->
+<div class="af-tier af-t-a"><span class="af-ltr">A</span>Prospective<br>(Non-Adopter)</div>
+<div class="af-cell active"><ul>
+<li>Invite to webinars, listening sessions, and OA learning events</li>
+<li>Hold brief introductory calls to understand barriers, demystify OA, and gauge readiness</li>
+<li>Extend invitations to OA Fellows to spark early interest</li>
+<li>Engage CEOs and mission leaders</li>
+</ul></div>
+<div class="af-cell active"><ul>
+<li>Deliver an introductory consultation (what OA is, why it matters, and how to get started)</li>
+<li>Determine the level of future 1:1 support needed</li>
+<li>Invite to discovery opportunities (e.g., OA Fellows)</li>
+</ul></div>
+<div class="af-cell active"><ul>
+<li>Provide a structured 2-month advisory consultation focused on closing key gaps (readiness assessment)</li>
+<li>Develop an OA Action Plan with clear next steps and follow-up cadence to ensure accountability for adoption</li>
+</ul></div>
+<div class="af-cell active last-active"><ul>
+<li>Execute OA Action Plan</li>
+<li>Utilize Fidelity Monitoring tool to validate OA Gold / OA Platinum</li>
+<li>Encourage expansion of OA practices across all programs</li>
+<li>Identify targeted support to close gaps</li>
+</ul></div>
+<div class="af-dest">
+<span class="af-badge gold">OA Gold ★</span>
+<span class="af-badge plat">OA Platinum ★★</span>
+</div>
+
+<!-- ROW B: Exploring -->
+<div class="af-tier af-t-b"><span class="af-ltr">B</span>Exploring</div>
+<div class="af-cell inactive">Already past this phase</div>
+<div class="af-cell active"><ul>
+<li>Deliver an introductory consultation (what OA is, why it matters, and how to get started)</li>
+<li>Determine the level of future 1:1 support needed</li>
+<li>Invite to discovery opportunities (e.g., OA Fellows)</li>
+</ul></div>
+<div class="af-cell active"><ul>
+<li>Provide a structured 2-month advisory consultation focused on closing key gaps (readiness assessment)</li>
+<li>Develop an OA Action Plan with clear next steps and follow-up cadence to ensure accountability for adoption</li>
+</ul></div>
+<div class="af-cell active last-active"><ul>
+<li>Execute OA Action Plan</li>
+<li>Utilize Fidelity Monitoring tool to validate OA Gold / OA Platinum</li>
+<li>Encourage expansion of OA practices across all programs</li>
+<li>Identify targeted support to close gaps</li>
+</ul></div>
+<div class="af-dest">
+<span class="af-badge gold">OA Gold ★</span>
+<span class="af-badge plat">OA Platinum ★★</span>
+</div>
+
+<!-- ROW C: Progressing (Partial Adopter) -->
+<div class="af-tier af-t-c"><span class="af-ltr">C</span>Progressing<br>(Partial Adopter)</div>
+<div class="af-cell inactive">Already past this phase</div>
+<div class="af-cell active"><ul>
+<li>Deliver an introductory consultation (what OA is, why it matters, and how to get started)</li>
+<li>Determine the level of future 1:1 support needed</li>
+<li>Invite to discovery opportunities (e.g., OA Fellows)</li>
+</ul></div>
+<div class="af-cell active"><ul>
+<li>Provide a structured 2-month advisory consultation focused on closing key gaps (readiness assessment)</li>
+<li>Develop an OA Action Plan with clear next steps and follow-up cadence to ensure accountability for adoption</li>
+<li>Offer self-learning path or shorter consultation option based on organizational readiness</li>
+</ul></div>
+<div class="af-cell active last-active"><ul>
+<li>Execute OA Action Plan</li>
+<li>Utilize Fidelity Monitoring tool to validate OA Gold / OA Platinum</li>
+<li>Encourage expansion of OA practices across all programs</li>
+<li>Identify targeted support to close gaps</li>
+</ul></div>
+<div class="af-dest">
+<span class="af-badge gold">OA Gold ★</span>
+<span class="af-badge plat">OA Platinum ★★</span>
+</div>
+
+<!-- ROW D: Ready (Gold ★) -->
+<div class="af-tier af-t-d"><span class="af-ltr">D</span>Ready<br>(Gold ★)</div>
+<div class="af-cell inactive">Already past this phase</div>
+<div class="af-cell inactive">Already past this phase</div>
+<div class="af-cell active"><ul>
+<li>Utilize Fidelity Monitoring tool to validate OA Gold</li>
+<li>Encourage expansion of OA practices across all programs (if adoption is limited today)</li>
+<li>Assess interest and commitment to pursue OA Platinum</li>
+<li>Identify targeted support to close remaining gaps</li>
+</ul></div>
+<div class="af-cell active last-active"><ul>
+<li>Execute action plan for Platinum readiness</li>
+<li>Begin transition to Individualized Consultation for Platinum-level support</li>
+<li>Engage as peer mentor or speaker for earlier-tier organizations</li>
+</ul></div>
+<div class="af-dest">
+<span class="af-badge plat">OA Platinum ★★</span>
+</div>
+
+<!-- ROW E: Exemplary (Platinum ★★) -->
+<div class="af-tier af-t-e"><span class="af-ltr">E</span>Exemplary<br>(Platinum ★★)</div>
+<div class="af-cell inactive">Already past this phase</div>
+<div class="af-cell inactive">Already past this phase</div>
+<div class="af-cell inactive">Already past this phase</div>
+<div class="af-cell active last-active"><ul>
+<li>Validate OA Platinum fidelity across all programs</li>
+<li>Encourage enterprise-wide expansion if not yet fully scaled</li>
+<li>Engage as OA champions and mentors (speakers for webinars, learning events, and Fellows sessions)</li>
+<li>Contribute to network-wide peer learning and continuous improvement</li>
+</ul></div>
+<div class="af-dest">
+<span class="af-badge champ">OA Champion<br>(Network Leader)</span>
+</div>
+</div>
+
+<!-- TIMELINE TABLE -->
+<h3 style="margin-top:36px">⏱ Estimated Timelines by Starting Tier</h3>
+<table class="af-tl">
+<tr><th>Pathway</th><th>Estimated Timeline</th></tr>
+<tr><td>Non-Adopter → OA Gold</td><td>6 – 12 months</td></tr>
+<tr><td>Non-Adopter → OA Platinum</td><td>6 – 18 months</td></tr>
+<tr><td>Exploring → OA Gold</td><td>3 – 6 months</td></tr>
+<tr><td>Exploring → OA Platinum</td><td>3 – 9 months</td></tr>
+<tr><td>Partial Adopter → OA Gold</td><td>3 – 4 months</td></tr>
+<tr><td>Partial Adopter → OA Platinum</td><td>3 – 5 months</td></tr>
+<tr><td>Gold → OA Platinum</td><td>1 – 6 months</td></tr>
+<tr><td>Platinum → OA Champion</td><td><em>Ongoing</em></td></tr>
+</table>
+
+<p style="font-size:12px;color:#52585A;opacity:.6;margin-top:14px;text-align:center">All pathways lead to full OA adoption. Gold and Platinum members play a critical role as champions, mentors, and proof points for the network.</p>
+</div></section>
+<!-- ============ END ADOPTION FLOW SECTION ============ -->
+
+<section class="bg-b pad-sm" id="deliver"><div class="inner">
+<div class="eyebrow">Deliverables</div>
+<h2>Six tools. One system.</h2>
+<div class="del" style="margin-top:28px">
+<div class="d blue"><div class="d-icon">📄</div><h4>ToA Overview</h4><p>Executive-level · 4×5 visual</p></div>
+<div class="d"><div class="d-icon">📚</div><h4>ToA Full Detail</h4><p>25 areas × 5 tiers</p></div>
+<div class="d lime"><div class="d-icon">🔄</div><h4>Role Crosswalk</h4><p>25 areas → 8 roles matrix</p></div>
+<div class="d purple"><div class="d-icon">📋</div><h4>Role Guides ×8</h4><p>Role-specific progression</p></div>
+<div class="d orange"><div class="d-icon">🤝</div><h4>Support Matching</h4><p>Tiers → support levels</p></div>
+<div class="d"><div class="d-icon">📊</div><h4>Self-Assessment Tool</h4><p>Where you stand + next step</p></div>
+</div>
+</div></section>
+
+<section class="bg-w pad" id="process"><div class="inner">
+<div class="eyebrow">Validation Process</div>
+<h2>Co-created, not imposed.</h2>
+<div class="tagline">Seven steps · May–October 2026 · Every step involves the people who will use this.</div>
+
+<div class="htl">
+<div class="htl-step"><div class="htl-num">01</div><div class="dot"></div><div class="htl-title">Core Team</div><div class="htl-date">May–Jun</div></div>
+<div class="htl-step"><div class="htl-num">02</div><div class="dot"></div><div class="htl-title">GII Mission &amp; Data</div><div class="htl-date">Jun–Jul</div></div>
+<div class="htl-step"><div class="htl-num">03</div><div class="dot"></div><div class="htl-title">Champions</div><div class="htl-date">Jul–Aug</div></div>
+<div class="htl-step"><div class="htl-num">04</div><div class="dot"></div><div class="htl-title">Frontline</div><div class="htl-date">Aug–Sep</div></div>
+<div class="htl-step"><div class="htl-num">05</div><div class="dot"></div><div class="htl-title">MDRC</div><div class="htl-date">Ongoing</div></div>
+<div class="htl-step"><div class="htl-num">06</div><div class="dot"></div><div class="htl-title">MOLÉ</div><div class="htl-date">Sep</div></div>
+<div class="htl-step"><div class="htl-num">07</div><div class="dot"></div><div class="htl-title">Finalize</div><div class="htl-date">Oct</div></div>
+</div>
+
+<div class="val-grid">
+<div class="val-card"><div class="val-num">01</div><div class="val-when">May–June 2026</div><h4>Core Team Review</h4><div class="val-who">Sandra Preciado · Katherine Maloney · Serah George</div><p>Validate alignment with OA framework, survey data and all prior collaborative work. Ensure structure and role assignments are grounded in existing evidence.</p></div>
+<div class="val-card"><div class="val-num">02</div><div class="val-when">June–July 2026</div><h4>GII Mission &amp; Data Team</h4><div class="val-who">Broader GII mission and data team members</div><p>Based on their area of expertise and their experience working directly with members: what would they change? Do the progression descriptions match what they see on the ground?</p></div>
+<div class="val-card"><div class="val-num">03</div><div class="val-when">July–August 2026</div><h4>Champion Validation</h4><div class="val-who">2 Platinum + 3 Gold member organizations</div><p>Mission leaders and directors who've lived the adoption journey validate whether the tier progressions ring true to their real experience.</p></div>
+<div class="val-card"><div class="val-num">04</div><div class="val-when">August–September 2026</div><h4>Frontline Validation</h4><div class="val-who">Career Navigators Advisory Council + frontline staff</div><p>Do the role guides reflect how people actually move through stages? Does the "you" language land? Is anything missing from their daily reality?</p></div>
+<div class="val-card"><div class="val-num">05</div><div class="val-when">Concurrent</div><h4>MDRC Input</h4><div class="val-who">MDRC evaluation team</div><p>Which service areas carry the most weight for outcomes? Evaluation-informed prioritization to shape how the self-assessment tool weights areas for Gold and Platinum.</p></div>
+<div class="val-card"><div class="val-num">06</div><div class="val-when">September 2026</div><h4>Network Review at MOLÉ</h4><div class="val-who">Feedback session at the Mission Optimization Learning Event</div><p>Present the validated draft to the broader membership. Dedicated session for structured feedback — the network's last chance to shape it before finalization.</p></div>
+<div class="val-card final"><div class="val-num">07</div><div class="val-when">October 2026</div><h4>Finalization and Launch</h4><div class="val-who">Core team + all input converges</div><p>All stakeholder feedback and MDRC evidence converge. The Theory of Action will not be locked until both collaborative input and evaluation findings are in.</p></div>
+</div>
+</div></section>
+
+<section class="bg-g pad" id="impact"><div class="inner" style="text-align:center">
+<div class="eyebrow">Expected Impact</div>
+<h2>What changes.</h2>
+<div class="g3" style="margin-top:36px;text-align:center">
+<div>
+<div style="font-size:36px;margin-bottom:10px">🏢</div>
+<div style="font-size:14px;font-weight:700;color:#00539F;margin-bottom:10px">For Organizations</div>
+<div style="font-size:13px;color:#52585A;line-height:1.7">Clear path · Know where they stand · Targeted support · Data-driven self-assessment</div>
+</div>
+<div>
+<div style="font-size:36px;margin-bottom:10px">👥</div>
+<div style="font-size:14px;font-weight:700;color:#00539F;margin-bottom:10px">For Staff</div>
+<div style="font-size:13px;color:#52585A;line-height:1.7">Know what's theirs · Clear progression · Less confusion · Growth pathway</div>
+</div>
+<div>
+<div style="font-size:36px;margin-bottom:10px">🎯</div>
+<div style="font-size:14px;font-weight:700;color:#00539F;margin-bottom:10px">For Participants</div>
+<div style="font-size:13px;color:#52585A;line-height:1.7">Consistent quality · Better outcomes · Same standard everywhere · Economic mobility</div>
+</div>
+</div>
+<div style="margin-top:40px;background:linear-gradient(135deg,rgba(255,214,0,.15),rgba(233,153,47,.15));border:2px solid #E9992F;border-radius:12px;padding:22px;display:inline-block">
+<div style="font-size:12px;font-weight:700;color:#E9992F;letter-spacing:.08em;margin-bottom:4px">2027 TARGETS</div>
+<div style="font-size:22px;font-weight:900;color:#00539F">60+ Gold · 35+ Platinum</div>
+</div>
+</div></section>
+
+
+
+<section class="bg-w pad-sm" id="logicmodel"><div class="inner" style="text-align:center">
+<div class="eyebrow">Appendix</div>
+<h2>Logic Model</h2>
+<p style="color:#52585A;max-width:600px;margin:10px auto 28px;font-size:14px">Double-nested model: GII support → Member capacity → Participant outcomes. Two levels, one connected system.</p>
+<a href="https://sandra-smart.github.io/OA-Theory-of-Change-5-adoption-tiers/OA-Logic-Model.html" target="_blank" class="icard link" style="display:inline-block;font-size:15px;padding:20px 40px;border-top:4px solid #E9992F;text-decoration:none">→ View Full Logic Model</a>
+</div></section>
+
+<footer>DRAFT — For Internal Discussion · May 2026 · Goodwill Industries International</footer>
+</body></html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OA Role Guide — Career Navigator</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   GOODWILL BRAND BOOK — Aligned CSS
+   Core: Reflex Blue #00539F · Text Gray #52585A
+   Primary: Medium Blue #4F87C6 · Light Blue #7CC1E8 · Medium Green #4FBC86 · Lime #B2D235
+   Secondary: Orange #E9992F · Red #DF4E51 · Purple #A95678
+   Font: Lato (Google Fonts)
+   ═══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Lato,'Segoe UI',Arial,sans-serif;
+  background:#fff;color:#52585A;line-height:1.6;
+  letter-spacing:.02em;position:relative;overflow-x:hidden
+}
+body::before{
+  content:"DRAFT";position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-35deg);
+  font-size:18vw;font-weight:900;color:rgba(0,0,0,.015);
+  pointer-events:none;z-index:0;letter-spacing:.12em
+}
+.page{position:relative;z-index:1;max-width:1360px;margin:0 auto;padding:28px 24px 52px}
+
+/* === HEADER === */
+header{
+  background:linear-gradient(135deg,#4F87C6,#3A6FA8);color:#fff;
+  border-radius:12px;padding:34px 40px 28px;margin-bottom:22px;
+  box-shadow:0 4px 20px rgba(79,135,198,.18);position:relative;overflow:hidden
+}
+header::after{
+  content:"";position:absolute;right:-50px;top:-50px;
+  width:220px;height:220px;background:rgba(79,188,134,.12);border-radius:50%
+}
+header .role-icon{font-size:42px;margin-bottom:6px}
+header h1{font-size:28px;font-weight:900;margin-bottom:4px;position:relative;letter-spacing:-.01em}
+header .sub{font-size:15px;opacity:.85;margin-bottom:12px;letter-spacing:.02em;line-height:1.5}
+header .meta{
+  display:flex;gap:20px;flex-wrap:wrap;font-size:12.5px;opacity:.68;
+  border-top:1px solid rgba(255,255,255,.14);padding-top:10px;letter-spacing:.02em
+}
+.draft-badge{
+  display:inline-block;background:#4FBC86;color:#fff;font-size:10px;font-weight:700;
+  padding:4px 14px;border-radius:20px;letter-spacing:.1em;vertical-align:middle;margin-left:10px
+}
+
+/* === SNAPSHOT CARD === */
+.snapshot{
+  background:#fff;border-radius:12px;padding:24px 28px;margin-bottom:20px;
+  box-shadow:0 2px 12px rgba(79,135,198,.06);display:grid;
+  grid-template-columns:1fr 1fr;gap:20px
+}
+.snapshot h2{font-size:20px;font-weight:900;color:#00539F;margin-bottom:8px;grid-column:1/-1;letter-spacing:-.01em}
+.snap-block{font-size:14px;line-height:1.65;color:#52585A}
+.snap-block strong{color:#00539F}
+.snap-block .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#52585A;opacity:.6;margin-bottom:3px}
+.load-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.load-chip{font-size:12px;font-weight:700;padding:4px 12px;border-radius:8px}
+.chip-p{background:rgba(79,188,134,.12);color:#4FBC86;border:1px solid rgba(79,188,134,.3)}
+.chip-c{background:rgba(79,135,198,.12);color:#4F87C6;border:1px solid rgba(79,135,198,.3)}
+.chip-i{background:rgba(82,88,90,.08);color:#52585A;border:1px solid rgba(82,88,90,.2)}
+
+/* === HOW TO USE === */
+.how-to{
+  background:#fff;border:1px solid rgba(79,135,198,.15);border-left:5px solid #4FBC86;
+  border-radius:12px;padding:18px 22px;margin-bottom:20px;font-size:13.5px;
+  color:#52585A;line-height:1.65;box-shadow:0 2px 12px rgba(79,135,198,.06);letter-spacing:.02em
+}
+.how-to strong{color:#00539F}
+.how-to .legend-inline{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;font-size:13px;letter-spacing:.02em}
+.how-to .legend-inline span{display:flex;align-items:center;gap:5px}
+.leg-dot{width:14px;height:14px;border-radius:3px;display:inline-block;flex-shrink:0}
+.leg-green{background:#4FBC86}.leg-blue{background:#4F87C6}.leg-gray{background:#999}
+
+/* === STICKY TIER LEGEND === */
+.tier-legend{
+  position:sticky;top:0;z-index:100;display:grid;
+  grid-template-columns:280px repeat(5,1fr);gap:4px;
+  padding:8px 0;background:#fff;border-bottom:2px solid rgba(79,135,198,.2);margin-bottom:4px
+}
+.tier-legend .corner{
+  display:flex;align-items:center;justify-content:flex-end;padding-right:12px;
+  font-size:11px;font-weight:700;color:#52585A;text-transform:uppercase;letter-spacing:.08em;opacity:.6
+}
+.tl-cell{text-align:center;border-radius:6px;padding:8px 6px;font-weight:700;font-size:12px;letter-spacing:.03em}
+.tl-a{background:#7CC1E8;color:#000}
+.tl-b{background:#4F87C6;color:#000}
+.tl-c{background:#4FBC86;color:#000}
+.tl-d{background:#D4AF37;color:#000;border:1.5px solid #B8972E}
+.tl-e{background:#4D4F51;color:#fff;border:1.5px solid #3A3C3E}
+
+/* === SECTION HEADERS === */
+.section-hdr{
+  border-radius:12px;padding:16px 22px;font-size:18px;font-weight:900;color:#fff;
+  margin:24px 0 8px;display:flex;align-items:center;gap:10px;
+  box-shadow:0 2px 10px rgba(79,135,198,.12);letter-spacing:.01em
+}
+.section-hdr .sec-sub{font-size:13px;font-weight:400;opacity:.8;margin-left:auto;letter-spacing:.02em}
+.sh-green{background:linear-gradient(135deg,#4FBC86,#3A9E6D)}
+.sh-blue{background:linear-gradient(135deg,#4F87C6,#3A6FA8)}
+.sh-gray{background:linear-gradient(135deg,#4D4F51,#3A3C3E)}
+
+/* === SERVICE AREA ROW === */
+.sa-row{display:grid;grid-template-columns:280px repeat(5,1fr);gap:4px;margin:4px 0}
+.sa-label{
+  background:#fff;border-radius:12px;padding:14px 14px;
+  display:flex;flex-direction:column;justify-content:center;
+  box-shadow:0 1px 4px rgba(79,135,198,.05)
+}
+.sa-label.border-p{border-left:4px solid #4FBC86}
+.sa-label.border-c{border-left:4px solid #4F87C6}
+.sa-label.border-i{border-left:4px solid #999}
+.sa-label .sa-name{font-size:14px;font-weight:700;color:#00539F;line-height:1.3;margin-bottom:4px;letter-spacing:.01em}
+.sa-label .sa-meta{font-size:11px;color:#52585A;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sa-label .sa-meta .adopt{background:rgba(79,188,134,.12);color:#4FBC86;font-weight:700;padding:2px 7px;border-radius:6px;font-size:10.5px}
+.sa-label .sa-meta .role-tag{font-weight:700;padding:2px 7px;border-radius:6px;font-size:10.5px}
+.rt-p{background:rgba(79,188,134,.12);color:#4FBC86}
+.rt-c{background:rgba(79,135,198,.12);color:#4F87C6}
+.rt-i{background:rgba(82,88,90,.08);color:#52585A}
+
+/* === CELLS === */
+.sa-cell{
+  background:#fff;border-radius:6px;padding:12px 12px;font-size:12.8px;
+  line-height:1.58;color:#52585A;box-shadow:0 1px 3px rgba(79,135,198,.04);
+  border-top:3px solid transparent;transition:box-shadow .15s;letter-spacing:.02em
+}
+.sa-cell:hover{box-shadow:0 3px 12px rgba(79,135,198,.1);background:rgba(79,188,134,.02)}
+.sa-cell.ca{border-top-color:#7CC1E8}
+.sa-cell.cb{border-top-color:#4F87C6}
+.sa-cell.cc{border-top-color:#4FBC86}
+.sa-cell.cd{border-top-color:#D4AF37}
+.sa-cell.ce{border-top-color:#4D4F51}
+
+/* === CONTRIBUTOR / INFORMED ROWS === */
+.contrib-row{
+  background:#fff;border-radius:12px;padding:16px 20px;margin:6px 0;
+  box-shadow:0 1px 4px rgba(79,135,198,.05);display:grid;
+  grid-template-columns:240px 1fr;gap:16px;align-items:start
+}
+.contrib-row.cr-c{border-left:4px solid #4F87C6}
+.contrib-row.cr-i{border-left:4px solid #999}
+.cr-label .cr-name{font-size:14px;font-weight:700;color:#00539F;margin-bottom:3px;letter-spacing:.01em}
+.cr-label .cr-meta{font-size:11px;color:#52585A;display:flex;gap:6px;flex-wrap:wrap}
+.cr-body{font-size:13.5px;line-height:1.65;color:#52585A;letter-spacing:.02em}
+.cr-body strong{color:#00539F}
+
+/* === QUICK REFERENCE TABLE === */
+.qr-section{margin-top:32px;margin-bottom:28px}
+.qr-section h2{font-size:20px;font-weight:900;color:#00539F;margin-bottom:10px;letter-spacing:-.01em}
+.qr-wrap{overflow-x:auto;border-radius:12px;box-shadow:0 2px 12px rgba(79,135,198,.08)}
+.qr-table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:700px}
+.qr-table th{background:#4F87C6;color:#fff;padding:10px 10px;text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.03em}
+.qr-table td{padding:8px 10px;border-bottom:1px solid rgba(79,135,198,.1);vertical-align:middle}
+.qr-table tr:nth-child(even){background:rgba(79,135,198,.03)}
+.qr-table tr:hover{background:rgba(79,188,134,.05)}
+.qr-table .sym{text-align:center;font-size:15px;font-weight:700}
+.sym-p{color:#4FBC86}.sym-c{color:#4F87C6}.sym-i{color:#999}
+
+/* === RESOURCE BOX === */
+.resource-box{
+  background:rgba(233,153,47,.08);border:1px solid #E9992F;border-radius:12px;
+  padding:20px 24px;margin:24px 0;font-size:14px;color:#52585A;
+  line-height:1.65;display:flex;gap:12px;align-items:flex-start;letter-spacing:.02em
+}
+.resource-box .icon{font-size:24px;flex-shrink:0}
+.resource-box strong{color:#00539F}
+
+/* === FOOTER === */
+footer{
+  text-align:center;font-size:11px;color:#52585A;opacity:.5;
+  border-top:1px solid rgba(127,193,232,.2);padding-top:20px;
+  margin-top:16px;line-height:1.6;letter-spacing:.03em
+}
+footer strong{color:#52585A}
+
+@media(max-width:1100px){
+  .tier-legend,.sa-row{grid-template-columns:220px repeat(5,1fr)}
+  .sa-cell{font-size:11.5px;padding:10px 8px}
+  .snapshot{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- ═══════ HEADER ═══════ -->
+<header>
+  <div class="role-icon">🧭</div>
+  <h1>Goodwill Opportunity Accelerator® (OA) — Career Navigator Role Guide <span class="draft-badge">DRAFT</span></h1>
+  <div class="sub">Frontline Staff · Career Navigators<br>What You Own, What You Support and What Belongs to Someone Else</div>
+  <div class="meta">
+    <span>May 2026</span>
+    <span>Goodwill Industries International</span>
+  </div>
+</header>
+
+<!-- ═══════ SNAPSHOT CARD ═══════ -->
+<div class="snapshot">
+  <h2>Your Role at a Glance</h2>
+  <div class="snap-block">
+    <div class="label">What You Do</div>
+    You work directly with participants every day — helping them understand where they are, build a plan, overcome barriers, find jobs and stay employed. You are the person they rely on most throughout their entire journey. From the moment someone walks through the door to a year after they've started working, you are their primary point of contact and their strongest advocate.
+  </div>
+  <div class="snap-block">
+    <div class="label">Your Workload</div>
+    You touch <strong>19 of 25</strong> service areas — more than any other role. That's why what you do matters so much and why your professional development is a priority.
+    <div class="load-chips">
+      <span class="load-chip chip-p">★ 9 areas you OWN</span>
+      <span class="load-chip chip-c">◆ 6 areas you SUPPORT</span>
+      <span class="load-chip chip-i">○ 4 areas you're INFORMED on</span>
+    </div>
+  </div>
+  <div class="snap-block" style="grid-column:1/-1;">
+    <div class="label">Why Certification Matters</div>
+    With 9 primary areas — the heaviest load of any role in the OA model — deep competence isn't optional. That's why Career Navigator certification through the <strong>Goodwill Career Coach and Navigator Certificate Program</strong> is a core OA requirement. The volume and complexity of your work demands professional training. Certification doesn't just check a box — it gives you the tools to do this job well and sustain it over time.
+  </div>
+</div>
+
+<!-- ═══════ HOW TO USE ═══════ -->
+<div class="how-to">
+  <strong>How to use this guide:</strong> This guide shows only the service areas that involve your role. For each area, you'll see what your responsibility looks like at each adoption stage — from Prospective to Exemplary. Use this to understand exactly what's expected of you today and what it takes to move to the next level.
+  <div class="legend-inline">
+    <span><span class="leg-dot leg-green"></span> <strong>Green = You OWN it</strong> — you're the primary person responsible</span>
+    <span><span class="leg-dot leg-blue"></span> <strong>Blue = You SUPPORT it</strong> — you actively contribute but someone else leads</span>
+    <span><span class="leg-dot leg-gray"></span> <strong>Gray = You're INFORMED</strong> — you stay in the loop but it's not yours to drive</span>
+  </div>
+</div>
+
+<!-- ═══════ STICKY TIER LEGEND ═══════ -->
+<div class="tier-legend">
+  <div class="corner">Your Stage →</div>
+  <div class="tl-cell tl-a">A · Prospective</div>
+  <div class="tl-cell tl-b">B · Exploring</div>
+  <div class="tl-cell tl-c">C · Progressing</div>
+  <div class="tl-cell tl-d">D · Ready ★ Gold</div>
+  <div class="tl-cell tl-e">E · Exemplary ★★ Plat</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 1 — PRIMARY AREAS (9)
+     ═══════════════════════════════════════ -->
+<div class="section-hdr sh-green"><span>★</span> Your Primary Areas — You Own These <span class="sec-sub">9 areas</span></div>
+<p style="font-size:13.5px;color:#555;margin:6px 0 12px;padding:0 4px;">These are the areas where <strong>you</strong> are the person directly responsible. If these don't happen well, it's on you. Here's exactly what each one looks like at every stage.</p>
+
+<!-- 8. Intake -->
+<div class="sa-row">
+  <div class="sa-label border-p"><div class="sa-name">8. Registration & Intake</div><div class="sa-meta"><span class="adopt">90% adopted</span><span class="role-tag rt-p">★ You Own This</span></div></div>
+  <div class="sa-cell ca">You're not conducting a standardized intake. There's no consistent process for what you ask or capture when someone walks in.</div>
+  <div class="sa-cell cb">You're collecting some information during intake, but the process isn't standardized. What you capture varies depending on the day or the person.</div>
+  <div class="sa-cell cc">You conduct intake for every participant, capturing key demographic, work history and education information. You have a consistent process you follow each time.</div>
+  <div class="sa-cell cd">You conduct a structured intake aligned with OA data requirements for every participant. You capture the information needed to determine eligibility, identify barriers and begin planning their path. Your intake data feeds directly into their personalized plan.</div>
+  <div class="sa-cell ce">Your intake is comprehensive — you capture an extensive set of information that gives you a complete picture of each person's starting point. Every piece of data you collect is intentional and feeds directly into personalized service design and long-term outcome tracking.</div>
+</div>
+
+<!-- 9. Needs Assessment -->
+<div class="sa-row">
+  <div class="sa-label border-p"><div class="sa-name">9. Needs Assessment</div><div class="sa-meta"><span class="adopt">64% adopted</span><span class="role-tag rt-p">★ You Own This</span></div></div>
+  <div class="sa-cell ca">You're not conducting needs assessments. You may be aware of some barriers but aren't systematically evaluating them.</div>
+  <div class="sa-cell cb">You conduct needs assessments for some participants but not all. It depends on time, caseload, or how obvious the barriers are.</div>
+  <div class="sa-cell cc">You conduct a needs assessment for every participant — evaluating barriers across housing, transportation, health, childcare, legal issues, food security and more. This is how you understand the full picture.</div>
+  <div class="sa-cell cd">100% of your participants complete a needs assessment. You use the results to connect people to the right support services and to inform every service decision you make.</div>
+  <div class="sa-cell ce">100% completion. Your assessment results are integrated with referral technology so you can automatically connect participants to community resources — and track whether they actually received help.</div>
+</div>
+
+<!-- 10. Basic Ed -->
+<div class="sa-row">
+  <div class="sa-label border-p"><div class="sa-name">10. Basic Education Assessment</div><div class="sa-meta"><span class="adopt">21% adopted</span><span class="role-tag rt-p">★ You Own This</span></div></div>
+  <div class="sa-cell ca">You're not assessing reading, math, or English proficiency. Participants may enter training without knowing if they're academically ready.</div>
+  <div class="sa-cell cb">You assess some participants but there's no clear protocol. You may not know which participants should be assessed.</div>
+  <div class="sa-cell cc">You assess all participants without a diploma who are enrolling in occupational training. You use a valid tool to measure reading, math and English skills.</div>
+  <div class="sa-cell cd">Same as C — required for all non-diploma participants entering training. You use results to determine whether someone needs adult basic education or GED prep before occupational training.</div>
+  <div class="sa-cell ce">Same requirement. You may refer participants to a partner for the assessment itself, but you're responsible for ensuring it happens and using results to guide the right service path.</div>
+</div>
+
+<!-- 11. Career Readiness -->
+<div class="sa-row">
+  <div class="sa-label border-p"><div class="sa-name">11. Career Readiness Assessment</div><div class="sa-meta"><span class="adopt">46% adopted</span><span class="role-tag rt-p">★ You Own This</span></div></div>
+  <div class="sa-cell ca">You're not formally assessing career interests or readiness. You may ask informally, but there's no structured tool.</div>
+  <div class="sa-cell cb">You have a tool but you're not using it consistently. Some participants get assessed, others don't.</div>
+  <div class="sa-cell cc">Every participant you work with completes a valid career readiness or interest assessment. You use results to help match them with realistic career paths.</div>
+  <div class="sa-cell cd">100% of your participants complete this assessment. You use a valid, reliable tool and the results directly inform the career pathway documented in their plan.</div>
+  <div class="sa-cell ce">You use a standardized tool like JOFI or O*NET Interest Profiler for every participant. Results identify specific work-related interests, preferences and motivators that shape their entire career path.</div>
+</div>
+
+<!-- 12. Digital Skills Assessment -->
+<div class="sa-row">
+  <div class="sa-label border-p"><div class="sa-name">12. Digital Skills Assessment</div><div class="sa-meta"><span class="adopt">28% adopted</span><span class="role-tag rt-p">★ You Own This</span></div></div>
+  <div class="sa-cell ca">You're not measuring digital literacy. You may assume participants can use technology — or assume they can't — without actually knowing.</div>
+  <div class="sa-cell cb">You've identified a digital skills tool but you're not using it consistently.</div>
+  <div class="sa-cell cc">Every participant completes a digital skills assessment so you know exactly where they stand with technology — from basic computer use to workplace software.</div>
+  <div class="sa-cell cd">100% completion using a valid assessment. You use results to determine whether someone needs digital skills training and at what level.</div>
+  <div class="sa-cell ce">Every participant completes the Northstar Digital Literacy assessment. You use results to place participants in the right level of digital training and track their progress over time.</div>
+</div>
+
+<!-- 15. ICFP -->
+<div class="sa-row">
+  <div class="sa-label border-p"><div class="sa-name">15. Individual Career & Financial Plan</div><div class="sa-meta"><span class="adopt">58% adopted</span><span class="role-tag rt-p">★ You Own This</span></div></div>
+  <div class="sa-cell ca">You're not creating written plans with participants. Services happen without a clear roadmap.</div>
+  <div class="sa-cell cb">You create plans for some participants, but they lack specific goals. Plans may sit in a file and never get updated.</div>
+  <div class="sa-cell cc">Every participant you work with has a personalized career and financial plan. It documents their goals and the steps to get there.</div>
+  <div class="sa-cell cd">100% of your participants have a plan with SMART goals — specific, measurable, achievable, relevant and time-bound. The plan covers both career pathway and financial stability. You reference it in every interaction and update it as circumstances change.</div>
+  <div class="sa-cell ce">Plans are living documents. They include career goals, financial stability goals (budgeting, savings, credit), progress tracking and are updated regularly. Every service you recommend connects back to what's documented in this plan.</div>
+</div>
+
+<!-- 16. Wraparound -->
+<div class="sa-row">
+  <div class="sa-label border-p"><div class="sa-name">16. Wraparound Support Services</div><div class="sa-meta"><span class="adopt">92% adopted</span><span class="role-tag rt-p">★ You Own This</span></div></div>
+  <div class="sa-cell ca">You're not connecting participants to support services. If someone has a housing crisis or can't afford childcare, they're on their own.</div>
+  <div class="sa-cell cb">You make some referrals to community resources, but it's inconsistent. You may not follow up to see if participants actually connected with help.</div>
+  <div class="sa-cell cc">You actively identify barriers for each participant and connect them to support — housing, transportation, healthcare, childcare, food security, legal aid. Support is aligned to what each person actually needs.</div>
+  <div class="sa-cell cd">You coordinate comprehensive support through community partners. For every participant, you match services to their documented needs. You follow up to make sure connections are made — not just phone numbers handed out.</div>
+  <div class="sa-cell ce">You coordinate support through referral technology that tracks every referral from start to finish. You can see whether participants actually received services. No one falls through the cracks on your watch.</div>
+</div>
+
+<!-- 22. Job Search -->
+<div class="sa-row">
+  <div class="sa-label border-p"><div class="sa-name">22. Job Search & Prep</div><div class="sa-meta"><span class="adopt">92% adopted</span><span class="role-tag rt-p">★ You Own This</span></div></div>
+  <div class="sa-cell ca">You're not helping participants with job search. There's no resume help, interview coaching, or application support.</div>
+  <div class="sa-cell cb">You help some participants with resumes or interviews on an ad hoc basis, but it's not a standard part of your work.</div>
+  <div class="sa-cell cc">You provide resume and interview preparation as a standard service for your participants.</div>
+  <div class="sa-cell cd">You provide comprehensive job search support — resume creation, mock interviews, application coaching and professional presentation guidance. You help each participant target positions aligned with their career plan and skills.</div>
+  <div class="sa-cell ce">You provide complete job readiness support — including mock interviews, soft skills coaching, LinkedIn profiles, online application navigation and strategic coaching on how to address barriers like criminal records or employment gaps. You prepare participants to present their best selves.</div>
+</div>
+
+<!-- 24. Retention -->
+<div class="sa-row">
+  <div class="sa-label border-p"><div class="sa-name">24. Retention Services</div><div class="sa-meta"><span class="adopt">69% adopted</span><span class="role-tag rt-p">★ You Own This</span></div></div>
+  <div class="sa-cell ca">Once someone gets a job, your involvement ends. There's no structured follow-up.</div>
+  <div class="sa-cell cb">You check in with some placed participants, but it's irregular. There's no schedule or system.</div>
+  <div class="sa-cell cc">You're beginning to follow up with participants after placement at regular intervals to catch problems early.</div>
+  <div class="sa-cell cd">You conduct structured follow-up at 30, 60, 90 and 180 days after placement. You're the person who catches problems early — a car breaking down, a conflict with a supervisor, a childcare disruption — and connects people to support before it becomes job loss.</div>
+  <div class="sa-cell ce">You follow up for a full year — at 30, 60, 90, 180 and 365 days. You provide crisis intervention, workplace coaching, benefits navigation and financial stability support. You work with employers (with participant consent) to intervene early when issues emerge. You are the safety net.</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 2 — CONTRIBUTOR AREAS (6)
+     ═══════════════════════════════════════ -->
+<div class="section-hdr sh-blue"><span>◆</span> Your Contributor Areas — You Actively Support These <span class="sec-sub">6 areas</span></div>
+<p style="font-size:13.5px;color:#555;margin:6px 0 12px;padding:0 4px;">Someone else leads these areas, but you play an important supporting role. Here's what that looks like for you.</p>
+
+<div class="contrib-row cr-c">
+  <div class="cr-label"><div class="cr-name">2. Career Navigator Certification</div><div class="cr-meta"><span class="adopt">32% adopted</span><span class="role-tag rt-c">◆ You Support</span><span style="color:#888;font-size:10.5px;">Led by: Program Manager</span></div></div>
+  <div class="cr-body"><strong>Your role:</strong> You are the one getting certified. Complete the Goodwill Career Coach and Navigator Certificate Program. At Gold, at least 50% of Career Navigators are certified within the first year. At Platinum, 100%. This certification directly builds the skills you need for the 9 areas you own — it's an investment in your ability to do this work well.</div>
+</div>
+
+<div class="contrib-row cr-c">
+  <div class="cr-label"><div class="cr-name">7. Outreach & Recruitment</div><div class="cr-meta"><span class="adopt">77% adopted</span><span class="role-tag rt-c">◆ You Support</span><span style="color:#888;font-size:10.5px;">Led by: Bus. & Comm. Engagement</span></div></div>
+  <div class="cr-body"><strong>Your role:</strong> You support outreach by helping identify the right people to serve and by being available when referrals come in. You're often the first person a new participant meets after outreach brings them through the door. Your welcoming presence sets the tone for everything that follows.</div>
+</div>
+
+<div class="contrib-row cr-c">
+  <div class="cr-label"><div class="cr-name">13. Assessment Selection</div><div class="cr-meta"><span class="adopt">56% adopted</span><span class="role-tag rt-c">◆ You Support</span><span style="color:#888;font-size:10.5px;">Led by: Program Manager</span></div></div>
+  <div class="cr-body"><strong>Your role:</strong> While the Program Manager oversees assessment standards, <strong>you</strong> are the one selecting which assessments each participant takes based on their individual needs. Your professional judgment determines what each person needs — that's why your expertise matters so much here.</div>
+</div>
+
+<div class="contrib-row cr-c">
+  <div class="cr-label"><div class="cr-name">14. Orientation</div><div class="cr-meta"><span class="adopt">70% adopted</span><span class="role-tag rt-c">◆ You Support</span><span style="color:#888;font-size:10.5px;">Led by: Program Coordinator</span></div></div>
+  <div class="cr-body"><strong>Your role:</strong> You support orientation by being available to meet participants, answer questions and begin building the relationship that will carry through their entire journey. You may co-facilitate sessions. This is often where participants first connect with you — make it count.</div>
+</div>
+
+<div class="contrib-row cr-c">
+  <div class="cr-label"><div class="cr-name">17. Financial Education</div><div class="cr-meta"><span class="adopt">44% adopted</span><span class="role-tag rt-c">◆ You Support</span><span style="color:#888;font-size:10.5px;">Led by: Trainer</span></div></div>
+  <div class="cr-body"><strong>Your role:</strong> You reinforce financial concepts in your one-on-one work with participants. You connect financial education to their career plan — helping them understand how career goals and financial goals work together. If someone's career plan targets $18/hour, you help them think about what that means for their budget, savings and stability.</div>
+</div>
+
+<div class="contrib-row cr-c">
+  <div class="cr-label"><div class="cr-name">23. Job Placement</div><div class="cr-meta"><span class="adopt">84% adopted</span><span class="role-tag rt-c">◆ You Support</span><span style="color:#888;font-size:10.5px;">Led by: Business Engagement</span></div></div>
+  <div class="cr-body"><strong>Your role:</strong> You prepare participants for placement and ensure they're ready. You communicate participant skills, preferences and barriers to the Business Engagement team so placements match career plans. You're the bridge between the person and the job opportunity — no one knows their story better than you.</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 3 — INFORMED AREAS (4)
+     ═══════════════════════════════════════ -->
+<div class="section-hdr sh-gray"><span>○</span> Areas Where You Stay Informed <span class="sec-sub">4 areas</span></div>
+<p style="font-size:13.5px;color:#555;margin:6px 0 12px;padding:0 4px;">You don't lead or actively support these, but you should know what's happening because it affects your participants and your work.</p>
+
+<div class="contrib-row cr-i">
+  <div class="cr-label"><div class="cr-name">1. Functionally Aligned Staffing</div><div class="cr-meta"><span class="adopt">77% adopted</span><span class="role-tag rt-i">○ Informed</span><span style="color:#888;font-size:10.5px;">Led by: Mission Leader</span></div></div>
+  <div class="cr-body"><strong>Why it matters to you:</strong> How roles are structured determines your caseload, your focus and whether you can specialize in what you do best. When staffing is functionally aligned, you can focus on career navigation instead of being pulled into business engagement, data entry, or training delivery.</div>
+</div>
+
+<div class="contrib-row cr-i">
+  <div class="cr-label"><div class="cr-name">3. OA Fellows Program</div><div class="cr-meta"><span class="adopt">47% adopted</span><span class="role-tag rt-i">○ Informed</span><span style="color:#888;font-size:10.5px;">Led by: Mission Leader</span></div></div>
+  <div class="cr-body"><strong>Why it matters to you:</strong> OA Fellows bring back knowledge, strategies and tools that improve how you serve participants. Knowing who the Fellows are in your organization helps you access their expertise when you need it.</div>
+</div>
+
+<div class="contrib-row cr-i">
+  <div class="cr-label"><div class="cr-name">18. Foundational Skills Training</div><div class="cr-meta"><span class="adopt">68% adopted</span><span class="role-tag rt-i">○ Informed</span><span style="color:#888;font-size:10.5px;">Led by: Trainer</span></div></div>
+  <div class="cr-body"><strong>Why it matters to you:</strong> You refer participants to foundational skills training — things like communication, teamwork, time management and professionalism. Knowing what's covered helps you make better referrals and reinforce concepts in your one-on-one work.</div>
+</div>
+
+<div class="contrib-row cr-i">
+  <div class="cr-label"><div class="cr-name">21. Career Exploration</div><div class="cr-meta"><span class="adopt">37% adopted</span><span class="role-tag rt-i">○ Informed</span><span style="color:#888;font-size:10.5px;">Led by: Program Coordinator</span></div></div>
+  <div class="cr-body"><strong>Why it matters to you:</strong> When participants explore careers through job shadowing, tours, or apprenticeships, it directly informs the plans you build together. Staying connected to what exploration options are available helps you guide better career decisions.</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     QUICK REFERENCE TABLE
+     ═══════════════════════════════════════ -->
+<div class="qr-section">
+  <h2>📋 Quick Reference — All 19 Areas at a Glance</h2>
+  <div class="qr-wrap">
+  <table class="qr-table">
+    <thead><tr><th>#</th><th>Service Area</th><th>Your Role</th><th>Adopted</th><th>Area Lead</th></tr></thead>
+    <tbody>
+      <tr><td>8</td><td>Registration & Intake</td><td class="sym sym-p">★</td><td>90%</td><td>You</td></tr>
+      <tr><td>9</td><td>Needs Assessment</td><td class="sym sym-p">★</td><td>64%</td><td>You</td></tr>
+      <tr><td>10</td><td>Basic Education Assessment</td><td class="sym sym-p">★</td><td>21%</td><td>You</td></tr>
+      <tr><td>11</td><td>Career Readiness Assessment</td><td class="sym sym-p">★</td><td>46%</td><td>You</td></tr>
+      <tr><td>12</td><td>Digital Skills Assessment</td><td class="sym sym-p">★</td><td>28%</td><td>You</td></tr>
+      <tr><td>15</td><td>Individual Career & Financial Plan</td><td class="sym sym-p">★</td><td>58%</td><td>You</td></tr>
+      <tr><td>16</td><td>Wraparound Support Services</td><td class="sym sym-p">★</td><td>92%</td><td>You</td></tr>
+      <tr><td>22</td><td>Job Search & Prep</td><td class="sym sym-p">★</td><td>92%</td><td>You</td></tr>
+      <tr><td>24</td><td>Retention Services</td><td class="sym sym-p">★</td><td>69%</td><td>You</td></tr>
+      <tr style="background:#F0F7FF;"><td colspan="5" style="font-weight:700;color:#1565C0;font-size:11.5px;letter-spacing:.04em;">◆ CONTRIBUTOR AREAS</td></tr>
+      <tr><td>2</td><td>Career Navigator Certification</td><td class="sym sym-c">◆</td><td>32%</td><td>Program Manager</td></tr>
+      <tr><td>7</td><td>Outreach & Recruitment</td><td class="sym sym-c">◆</td><td>77%</td><td>Bus. & Comm. Engagement</td></tr>
+      <tr><td>13</td><td>Assessment Selection</td><td class="sym sym-c">◆</td><td>56%</td><td>Program Manager</td></tr>
+      <tr><td>14</td><td>Orientation</td><td class="sym sym-c">◆</td><td>70%</td><td>Program Coordinator</td></tr>
+      <tr><td>17</td><td>Financial Education</td><td class="sym sym-c">◆</td><td>44%</td><td>Trainer</td></tr>
+      <tr><td>23</td><td>Job Placement</td><td class="sym sym-c">◆</td><td>84%</td><td>Business Engagement</td></tr>
+      <tr style="background:#F5F5F5;"><td colspan="5" style="font-weight:700;color:#757575;font-size:11.5px;letter-spacing:.04em;">○ INFORMED AREAS</td></tr>
+      <tr><td>1</td><td>Functionally Aligned Staffing</td><td class="sym sym-i">○</td><td>77%</td><td>Mission Leader</td></tr>
+      <tr><td>3</td><td>OA Fellows Program</td><td class="sym sym-i">○</td><td>47%</td><td>Mission Leader</td></tr>
+      <tr><td>18</td><td>Foundational Skills Training</td><td class="sym sym-i">○</td><td>68%</td><td>Trainer</td></tr>
+      <tr><td>21</td><td>Career Exploration</td><td class="sym sym-i">○</td><td>37%</td><td>Program Coordinator</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ═══════ RESOURCE BOX ═══════ -->
+<div class="resource-box">
+  <div class="icon">💬</div>
+  <div>
+    <strong>What if you're not meeting a standard?</strong> That's okay — that's exactly what this guide is for. Find where you are today, look one column to the right and talk to your Program Manager about what support you need to get there. You don't have to jump to Platinum overnight. Progress is the goal — not perfection.<br><br>
+    <strong>GII offers three levels of support</strong> matched to your organization's stage: self-directed resources you can use on your own, group advisory consultations for structured guidance and individualized consultation for hands-on help closing specific gaps. Ask your Mission Leader which level of support your organization is working with.
+  </div>
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  DRAFT — For Internal Discussion · May 2026 · Goodwill Industries International<br>
+  <strong>This is 1 of 8 Role Guides.</strong> Guides are also available for: Mission Leader · Program Manager · Business Engagement · Community Engagement · Program Coordinator · Trainer · Data Specialist
+</footer>
+
+</div>
+
+</body>
+</html>

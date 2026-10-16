@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OA Theory of Action — Full Detail View</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   GOODWILL BRAND BOOK — Aligned CSS
+   Core (sparingly): Reflex Blue #00539F · Black #212721 · Text Gray #52585A
+   Primary (dominant): Medium Blue #4F87C6 · Light Blue #7CC1E8 · Medium Green #4FBC86 · Lime Green #B2D235
+   Secondary (supplemental): Red #DF4E51 · Purple #A95678 · Orange #E9992F · Yellow #FFD600
+   Font: Lato (Google Fonts) · Increased tracking
+   ═══════════════════════════════════════════════════════════════ */
+
+/* === RESET & BASE === */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Lato,'Segoe UI',Arial,sans-serif;
+  background:#fff;
+  color:#52585A;
+  line-height:1.6;
+  letter-spacing:.02em;
+  position:relative;
+  overflow-x:hidden
+}
+body::before{
+  content:"DRAFT";position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-35deg);
+  font-size:18vw;font-weight:900;color:rgba(0,0,0,.015);
+  pointer-events:none;z-index:0;letter-spacing:.12em
+}
+.page{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:28px 24px 52px}
+
+/* === HEADER === */
+header{
+  background:linear-gradient(135deg,#4F87C6,#3A6FA8);
+  color:#fff;border-radius:12px;padding:34px 40px 28px;margin-bottom:22px;
+  box-shadow:0 4px 20px rgba(79,135,198,.18);position:relative;overflow:hidden
+}
+header::after{
+  content:"";position:absolute;right:-50px;top:-50px;
+  width:220px;height:220px;background:rgba(79,188,134,.12);border-radius:50%
+}
+header h1{font-size:28px;font-weight:900;margin-bottom:4px;position:relative;letter-spacing:-.01em}
+header .sub{font-size:15px;opacity:.85;margin-bottom:12px;letter-spacing:.02em;line-height:1.5}
+header .meta{
+  display:flex;gap:20px;flex-wrap:wrap;font-size:12.5px;opacity:.68;
+  border-top:1px solid rgba(255,255,255,.14);padding-top:10px;letter-spacing:.02em
+}
+.draft-badge{
+  display:inline-block;background:#4FBC86;color:#fff;font-size:10px;font-weight:700;
+  padding:4px 14px;border-radius:20px;letter-spacing:.1em;vertical-align:middle;margin-left:10px
+}
+
+/* === HOW-TO & NAV === */
+.how-to{
+  background:#fff;border:1px solid rgba(79,135,198,.15);border-left:5px solid #4FBC86;
+  border-radius:12px;padding:18px 22px;margin-bottom:18px;font-size:13.5px;
+  color:#52585A;line-height:1.65;box-shadow:0 2px 12px rgba(79,135,198,.06);letter-spacing:.02em
+}
+.how-to strong{color:#00539F}
+
+.jump-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.jump-nav a{
+  display:inline-block;background:#4F87C6;color:#fff;text-decoration:none;
+  font-size:12px;font-weight:700;padding:7px 16px;border-radius:12px;
+  transition:background .2s;letter-spacing:.03em
+}
+.jump-nav a:hover{background:#4FBC86}
+
+/* === STICKY TIER LEGEND === */
+.tier-legend{
+  position:sticky;top:0;z-index:100;
+  display:grid;grid-template-columns:280px repeat(5,1fr);gap:4px;
+  padding:8px 0;background:#fff;
+  border-bottom:2px solid rgba(79,135,198,.2);margin-bottom:4px
+}
+.tier-legend .corner{
+  display:flex;align-items:center;justify-content:flex-end;padding-right:12px;
+  font-size:11px;font-weight:700;color:#52585A;text-transform:uppercase;
+  letter-spacing:.08em;opacity:.6
+}
+.tl-cell{text-align:center;border-radius:6px;padding:8px 6px;font-weight:700;font-size:12px;letter-spacing:.03em}
+.tl-a{background:#7CC1E8;color:#000}
+.tl-b{background:#4F87C6;color:#000}
+.tl-c{background:#4FBC86;color:#000}
+.tl-d{background:#D4AF37;color:#000;border:1.5px solid #B8972E}
+.tl-e{background:#4D4F51;color:#fff;border:1.5px solid #3A3C3E}
+
+/* === SECTION (details/summary) === */
+.section{margin-bottom:18px}
+.section summary{
+  cursor:pointer;list-style:none;border-radius:12px;padding:16px 22px;
+  font-size:18px;font-weight:900;color:#fff;display:flex;align-items:center;gap:10px;
+  box-shadow:0 2px 10px rgba(79,135,198,.12);user-select:none;transition:box-shadow .2s;
+  letter-spacing:.01em
+}
+.section summary:hover{box-shadow:0 4px 18px rgba(79,135,198,.2)}
+.section summary::-webkit-details-marker{display:none}
+.section summary::before{content:"▶";font-size:13px;transition:transform .25s;display:inline-block;width:18px;flex-shrink:0}
+.section[open] summary::before{transform:rotate(90deg)}
+.section summary .emoji{font-size:22px}
+.section summary .sec-sub{font-size:13px;font-weight:400;opacity:.8;margin-left:auto;letter-spacing:.02em}
+
+/* Section colors — matching brand palette */
+.s-green summary{background:linear-gradient(135deg,#4FBC86,#3A9E6D)}
+.s-teal summary{background:linear-gradient(135deg,#7CC1E8,#5AADDA)}
+.s-blue summary{background:linear-gradient(135deg,#4F87C6,#3A6FA8)}
+.s-navy summary{background:linear-gradient(135deg,#4D4F51,#3A3C3E)}
+
+/* === SERVICE AREA ROW === */
+.sa-row{display:grid;grid-template-columns:280px repeat(5,1fr);gap:4px;margin:4px 0}
+.sa-label{
+  background:#fff;border-radius:12px;padding:14px 14px;
+  display:flex;flex-direction:column;justify-content:center;
+  border-left:4px solid #4F87C6;box-shadow:0 1px 4px rgba(79,135,198,.05)
+}
+.sa-label .sa-name{font-size:14px;font-weight:700;color:#00539F;line-height:1.3;margin-bottom:4px;letter-spacing:.01em}
+.sa-label .sa-meta{font-size:11px;color:#52585A;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sa-label .sa-meta .adopt{
+  background:rgba(79,188,134,.12);color:#4FBC86;font-weight:700;
+  padding:2px 7px;border-radius:6px;font-size:10.5px
+}
+.sa-label .sa-meta .owner{
+  background:rgba(79,135,198,.12);color:#4F87C6;font-weight:700;
+  padding:2px 7px;border-radius:6px;font-size:10.5px
+}
+
+/* === CELLS === */
+.sa-cell{
+  background:#fff;border-radius:6px;padding:12px 12px;font-size:12.8px;
+  line-height:1.58;color:#52585A;box-shadow:0 1px 3px rgba(79,135,198,.04);
+  border-top:3px solid transparent;transition:box-shadow .15s;letter-spacing:.02em
+}
+.sa-cell:hover{box-shadow:0 3px 12px rgba(79,135,198,.1);background:rgba(79,188,134,.02)}
+.sa-cell.ca{border-top-color:#7CC1E8}
+.sa-cell.cb{border-top-color:#4F87C6}
+.sa-cell.cc{border-top-color:#4FBC86}
+.sa-cell.cd{border-top-color:#D4AF37}
+.sa-cell.ce{border-top-color:#4D4F51}
+.section .inner{padding:8px 0 12px}
+
+/* === ROLE CROSSWALK TABLE === */
+.cw-section{margin-top:36px;margin-bottom:32px}
+.cw-section h2{font-size:22px;font-weight:900;color:#00539F;margin-bottom:4px;letter-spacing:-.01em}
+.cw-section .cw-sub{font-size:13.5px;color:#52585A;margin-bottom:14px;line-height:1.6;letter-spacing:.02em}
+.cw-section .cw-sub strong{color:#00539F}
+.cw-wrap{overflow-x:auto;border-radius:12px;box-shadow:0 2px 12px rgba(79,135,198,.08)}
+.cw-table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:900px}
+.cw-table th{
+  background:#4F87C6;color:#fff;padding:10px 8px;text-align:center;
+  font-size:11.5px;font-weight:700;position:sticky;top:0;letter-spacing:.03em
+}
+.cw-table th:first-child{text-align:left;padding-left:14px;min-width:200px}
+.cw-table th:nth-child(2){min-width:60px}
+.cw-table td{padding:8px 8px;text-align:center;border-bottom:1px solid rgba(79,135,198,.1);vertical-align:middle}
+.cw-table td:first-child{text-align:left;font-weight:600;color:#52585A;padding-left:14px}
+.cw-table tr:nth-child(even){background:rgba(79,135,198,.03)}
+.cw-table tr:hover{background:rgba(79,188,134,.05)}
+.cw-table .group-row td{
+  background:#4FBC86;color:#fff;font-weight:900;font-size:12.5px;
+  padding:8px 14px;letter-spacing:.03em
+}
+.sym-p{color:#4FBC86;font-weight:800;font-size:16px}
+.sym-c{color:#4F87C6;font-weight:700;font-size:15px}
+.sym-i{color:#999;font-size:14px}
+.cw-table .load-row td{background:#4F87C6;color:#fff;font-weight:700;font-size:11px;letter-spacing:.02em}
+.legend-row{display:flex;gap:18px;margin-bottom:14px;font-size:13px;flex-wrap:wrap;letter-spacing:.02em}
+.legend-row span{display:flex;align-items:center;gap:4px}
+
+/* === FOOTER === */
+footer{
+  text-align:center;font-size:11px;color:#52585A;opacity:.5;
+  border-top:1px solid rgba(127,193,232,.2);padding-top:20px;margin-top:16px;letter-spacing:.03em
+}
+
+/* === RESPONSIVE === */
+@media(max-width:1100px){
+  .tier-legend,.sa-row{grid-template-columns:220px repeat(5,1fr)}
+  .sa-cell{font-size:11.5px;padding:10px 8px}
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- ═══════ HEADER ═══════ -->
+<header>
+  <h1>Goodwill Opportunity Accelerator® (OA) — Full Detail View <span class="draft-badge">DRAFT</span></h1>
+  <div class="sub">Program Directors · GII · MDRC<br>The Complete Operational Picture: All 25 Service Areas Across 5 Adoption Stages</div>
+  <div class="meta">
+    <span>May 2026</span>
+    <span>Goodwill Industries International</span>
+  </div>
+</header>
+
+<!-- ═══════ HOW TO READ ═══════ -->
+<div class="how-to">
+  <strong>How to use this view:</strong> This page shows every service area that makes up the Opportunity Accelerator — all 25 of them — organized into four components. For each area, you can see exactly what it looks like at each adoption stage, who is primarily responsible for it and how much of the network is currently adopting it. <strong>Read left to right</strong> to see progression. <strong>Use this to identify</strong> where your organization stands today and what the next step looks like for each area. Click any section header to expand or collapse it.
+</div>
+
+<!-- ═══════ JUMP NAV ═══════ -->
+<div class="jump-nav">
+  <a href="#sec1">🏗️ Build Your Foundation</a>
+  <a href="#sec2">🔍 Meet People Where They Are</a>
+  <a href="#sec3">📚 Deliver the Right Services</a>
+  <a href="#sec4">🚀 Launch Careers, Stay Connected</a>
+  <a href="#crosswalk">📋 Role Crosswalk</a>
+</div>
+
+<!-- ═══════ STICKY TIER LEGEND ═══════ -->
+<div class="tier-legend">
+  <div class="corner">Adoption Stage →</div>
+  <div class="tl-cell tl-a">A · Prospective</div>
+  <div class="tl-cell tl-b">B · Exploring</div>
+  <div class="tl-cell tl-c">C · Progressing</div>
+  <div class="tl-cell tl-d">D · Ready ★ Gold</div>
+  <div class="tl-cell tl-e">E · Exemplary ★★ Plat</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — BUILD YOUR FOUNDATION
+     ═══════════════════════════════════════════ -->
+<details class="section s-green" id="sec1" open>
+<summary><span class="emoji">🏗️</span> Build Your Foundation — Organizational Readiness <span class="sec-sub">6 service areas</span></summary>
+<div class="inner">
+
+<!-- 1 Staffing -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">1. Functionally Aligned Staffing</div><div class="sa-meta"><span class="adopt">77% adopted</span><span class="owner">★ Mission Leader</span></div></div>
+  <div class="sa-cell ca">No defined roles. Staff wear multiple hats with no formal structure for who handles what.</div>
+  <div class="sa-cell cb">Some roles are defined but not fully aligned to OA functions. Staff still cover multiple areas.</div>
+  <div class="sa-cell cc">Core functions are covered through existing staffing structures. Roles are starting to specialize.</div>
+  <div class="sa-cell cd">Staff are organized into clear functional areas. Each core function — career navigation, training, business engagement, leadership and data — has someone assigned.</div>
+  <div class="sa-cell ce">Full functional separation with dedicated roles for Career Navigators, Trainers, Business Engagement, Mission Leaders and Data Specialists. No one is stretched across competing functions.</div>
+</div>
+
+<!-- 2 CN Cert -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">2. Career Navigator Certification</div><div class="sa-meta"><span class="adopt">32% adopted</span><span class="owner">★ Program Manager</span></div></div>
+  <div class="sa-cell ca">No staff certified through the Goodwill Career Coach and Navigator Certificate Program.</div>
+  <div class="sa-cell cb">Awareness of the certification exists. Some staff may be exploring enrollment.</div>
+  <div class="sa-cell cc">Some staff are certified or currently enrolled. The organization is working toward broader coverage.</div>
+  <div class="sa-cell cd">At least 50% of staff providing coaching and career navigation services are certified within their first year of OA adoption.</div>
+  <div class="sa-cell ce">100% of staff providing coaching and career navigation services are certified. Any mission team member may also complete the training.</div>
+</div>
+
+<!-- 3 Fellows -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">3. OA Fellows Program</div><div class="sa-meta"><span class="adopt">47% adopted</span><span class="owner">★ Mission Leader</span></div></div>
+  <div class="sa-cell ca">No team members identified for the OA Fellows program.</div>
+  <div class="sa-cell cb">Interest has been expressed but no one has participated yet.</div>
+  <div class="sa-cell cc">At least one team member has completed or is currently enrolled in OA Fellows.</div>
+  <div class="sa-cell cd">At least one team member has completed or is enrolled. Fellows serve as internal champions guiding OA adoption.</div>
+  <div class="sa-cell ce">Two or more team members have completed or are enrolled. Fellows actively mentor staff and serve as OA ambassadors across the network.</div>
+</div>
+
+<!-- 4 ART -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">4. Referral Network &amp; Technology</div><div class="sa-meta"><span class="adopt">25% adopted</span><span class="owner">★ Data Specialist</span></div></div>
+  <div class="sa-cell ca">No referral technology in use. Referrals happen informally or not at all.</div>
+  <div class="sa-cell cb">Limited or pilot use of referral technology. Some manual referral processes exist.</div>
+  <div class="sa-cell cc">The organization has a referral process and partnerships with community organizations that provide support services.</div>
+  <div class="sa-cell cd">Referral partnerships are formalized. The organization has a documented process for connecting people to community support services.</div>
+  <div class="sa-cell ce">Automated Referral Technology (like UniteUs or FindHelp) is fully integrated. Electronic referrals are tracked from start to finish, ensuring no one falls through the cracks. Warm hand-off partnerships are guided by regional needs data.</div>
+</div>
+
+<!-- 5 Employer -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">5. Employer Partnerships</div><div class="sa-meta"><span class="adopt">48% adopted</span><span class="owner">★ Business Engagement</span></div></div>
+  <div class="sa-cell ca">No employer engagement. No formal relationships with hiring partners.</div>
+  <div class="sa-cell cb">Some employer contacts exist but no formal agreements or structured partnerships.</div>
+  <div class="sa-cell cc">Formal referral partnerships are in place with local employers who offer job opportunities.</div>
+  <div class="sa-cell cd">Employer partnerships are formalized with local, sector-driven employers. Relationships are based on real job placement activity.</div>
+  <div class="sa-cell ce">Partnerships are driven by labor market data and include co-created training programs. Employers help design curricula and provide direct hiring pipelines for jobs that pay a living wage.</div>
+</div>
+
+<!-- 6 Metrics -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">6. Evaluating Impact &amp; Metrics</div><div class="sa-meta"><span class="adopt">88% adopted</span><span class="owner">★ Data Specialist</span></div></div>
+  <div class="sa-cell ca">No data tracked. No system for measuring outcomes or program effectiveness.</div>
+  <div class="sa-cell cb">Some data fields are tracked but inconsistently. Reporting is sporadic.</div>
+  <div class="sa-cell cc">Basic data is tracked — enrollment, completion, placement, wages — and submitted regularly. A case management system is in use.</div>
+  <div class="sa-cell cd">A defined set of individual-level data is collected using a case management system. Post-placement outcomes are tracked at 30, 60, 90 and 180 days. Data is submitted to GII monthly.</div>
+  <div class="sa-cell ce">Comprehensive data is collected with extended follow-up through 365 days. The organization uses advanced tracking including credential attainment, wage growth, employment type and retention. Data drives continuous improvement.</div>
+</div>
+
+</div></details>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — MEET PEOPLE WHERE THEY ARE
+     ═══════════════════════════════════════════ -->
+<details class="section s-teal" id="sec2" open>
+<summary><span class="emoji">🔍</span> Meet People Where They Are — Assess &amp; Plan <span class="sec-sub">9 service areas</span></summary>
+<div class="inner">
+
+<!-- 7 Outreach -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">7. Outreach &amp; Recruitment</div><div class="sa-meta"><span class="adopt">77% adopted</span><span class="owner">★ Bus. &amp; Comm. Engagement</span></div></div>
+  <div class="sa-cell ca">No proactive outreach. People find services only through walk-ins or word of mouth.</div>
+  <div class="sa-cell cb">Informal outreach or limited referrals from community contacts.</div>
+  <div class="sa-cell cc">The organization uses community partner networks to reach potential participants. Outreach is intentional but not technology-driven.</div>
+  <div class="sa-cell cd">Outreach uses established community partner networks. The organization actively recruits through diverse channels.</div>
+  <div class="sa-cell ce">Outreach is technology-enabled using automated referral platforms and established referral partners to systematically reach people who need services most.</div>
+</div>
+
+<!-- 8 Intake -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">8. Registration &amp; Intake</div><div class="sa-meta"><span class="adopt">90% adopted</span><span class="owner">★ Career Navigator</span></div></div>
+  <div class="sa-cell ca">Intake is not aligned with key factors. No standardized process for gathering participant information.</div>
+  <div class="sa-cell cb">Intake partially aligns with key factors. Some information is collected but the process is inconsistent.</div>
+  <div class="sa-cell cc">Intake is aligned with basic key factors — demographic, work history and education information is captured for all participants.</div>
+  <div class="sa-cell cd">Intake is aligned with the core set of OA data requirements. The process captures the information needed to determine eligibility and inform service planning.</div>
+  <div class="sa-cell ce">Intake is comprehensive — capturing an extensive list of factors with thorough data capture. Every piece of information gathered feeds directly into personalized service design.</div>
+</div>
+
+<!-- 9 Needs -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">9. Needs Assessment</div><div class="sa-meta"><span class="adopt">64% adopted</span><span class="owner">★ Career Navigator</span></div></div>
+  <div class="sa-cell ca">Not used. Participant barriers across life domains are not systematically evaluated.</div>
+  <div class="sa-cell cb">Used inconsistently. Some participants receive a needs assessment, but it's not standard practice.</div>
+  <div class="sa-cell cc">All participants complete a needs assessment covering housing, transportation, health, childcare, legal issues and more.</div>
+  <div class="sa-cell cd">100% completion. Results directly inform support service referrals and service planning.</div>
+  <div class="sa-cell ce">100% completion. Assessment results are integrated with referral technology to automatically connect participants to the right community resources.</div>
+</div>
+
+<!-- 10 Basic Ed -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">10. Basic Education Assessment</div><div class="sa-meta"><span class="adopt">21% adopted</span><span class="owner">★ Career Navigator</span></div></div>
+  <div class="sa-cell ca">Not used. Reading, math and English proficiency are not assessed.</div>
+  <div class="sa-cell cb">Used inconsistently. Some participants are assessed, but there's no clear protocol for who should be.</div>
+  <div class="sa-cell cc">Assessments are completed for participants without a diploma who are enrolling in occupational training.</div>
+  <div class="sa-cell cd">Required for all participants without a diploma who enroll in occupational training. A valid assessment tool is used.</div>
+  <div class="sa-cell ce">Same requirement. Assessment may be provided directly or through a referral partner. Results inform whether participants need adult basic education or GED preparation before training.</div>
+</div>
+
+<!-- 11 Career Readiness -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">11. Career Readiness Assessment</div><div class="sa-meta"><span class="adopt">46% adopted</span><span class="owner">★ Career Navigator</span></div></div>
+  <div class="sa-cell ca">Not used. Career interests and readiness gaps are not formally identified.</div>
+  <div class="sa-cell cb">A tool has been identified but it's used inconsistently. Not all participants are assessed.</div>
+  <div class="sa-cell cc">All participants complete a valid career readiness or interest assessment to help match them with career paths.</div>
+  <div class="sa-cell cd">100% completion using a valid and reliable assessment tool.</div>
+  <div class="sa-cell ce">A standardized tool (such as JOFI or O*NET Interest Profiler) is used for all participants to identify interests, preferences and career motivators.</div>
+</div>
+
+<!-- 12 Digital Skills Assess -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">12. Digital Skills Assessment</div><div class="sa-meta"><span class="adopt">28% adopted</span><span class="owner">★ Career Navigator</span></div></div>
+  <div class="sa-cell ca">Not used. Digital literacy is not measured.</div>
+  <div class="sa-cell cb">A tool has been identified but it's used inconsistently.</div>
+  <div class="sa-cell cc">All participants complete a valid digital skills assessment to determine their comfort and gaps with technology.</div>
+  <div class="sa-cell cd">A valid digital skills assessment is completed by all participants.</div>
+  <div class="sa-cell ce">All participants complete the Northstar Digital Literacy assessment — a nationally recognized standard — to measure proficiency with computers, internet, email and workplace technology.</div>
+</div>
+
+<!-- 13 Assess Selection -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">13. Assessment Selection</div><div class="sa-meta"><span class="adopt">56% adopted</span><span class="owner">★ Program Manager</span></div></div>
+  <div class="sa-cell ca">No formal assessments are required for enrollment. Staff decide on an ad hoc basis.</div>
+  <div class="sa-cell cb">Some participants complete assessments, but there's no standard for which ones or when.</div>
+  <div class="sa-cell cc">All participants complete at least one valid assessment. Career Navigators select based on individual needs.</div>
+  <div class="sa-cell cd">100% of participants complete at least one valid assessment selected by their Career Navigator based on individual circumstances.</div>
+  <div class="sa-cell ce">100% complete the Northstar digital assessment plus additional assessments selected by their Career Navigator based on individual needs.</div>
+</div>
+
+<!-- 14 Orientation -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">14. Orientation</div><div class="sa-meta"><span class="adopt">70% adopted</span><span class="owner">★ Program Coordinator</span></div></div>
+  <div class="sa-cell ca">Not consistently offered. Participants may start services without understanding what's available.</div>
+  <div class="sa-cell cb">Offered but not completed by all participants. Attendance is optional or not tracked.</div>
+  <div class="sa-cell cc">All participants complete an orientation session before enrollment that explains services, sets expectations and introduces the program.</div>
+  <div class="sa-cell cd">100% completion before enrollment. Can be group or individual, virtual or in-person.</div>
+  <div class="sa-cell ce">100% completion. Establishes clear understanding of the full service menu, roles, responsibilities and what participants can expect throughout their journey.</div>
+</div>
+
+<!-- 15 ICFP -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">15. Individual Career &amp; Financial Plan</div><div class="sa-meta"><span class="adopt">58% adopted</span><span class="owner">★ Career Navigator</span></div></div>
+  <div class="sa-cell ca">Not consistently offered. Participants don't have a written plan guiding their services.</div>
+  <div class="sa-cell cb">Some plans are created but they lack specific, measurable goals. Plans may not be updated.</div>
+  <div class="sa-cell cc">All participants complete a personalized career and financial plan that documents goals and next steps.</div>
+  <div class="sa-cell cd">100% complete a plan with SMART goals — Specific, Measurable, Achievable, Relevant and Time-bound. Covers both career pathway and financial stability.</div>
+  <div class="sa-cell ce">Plans also include progress tracking, financial stability goals (budgeting, savings, credit) and are treated as living documents that evolve as participants progress.</div>
+</div>
+
+</div></details>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3 — DELIVER THE RIGHT SERVICES
+     ═══════════════════════════════════════════ -->
+<details class="section s-blue" id="sec3" open>
+<summary><span class="emoji">📚</span> Deliver the Right Services — Equip &amp; Connect <span class="sec-sub">7 service areas</span></summary>
+<div class="inner">
+
+<!-- 16 Wraparound -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">16. Wraparound Support Services</div><div class="sa-meta"><span class="adopt">92% adopted</span><span class="owner">★ Career Navigator</span></div></div>
+  <div class="sa-cell ca">No support services to remove life barriers. Participants are on their own for housing, transportation, childcare, etc.</div>
+  <div class="sa-cell cb">Limited referrals to community resources. Coverage is inconsistent and not coordinated.</div>
+  <div class="sa-cell cc">Support services are aligned to individual needs — help with housing, transportation, healthcare, childcare and food security.</div>
+  <div class="sa-cell cd">Comprehensive support is coordinated through community partners. Services matched to each person's documented needs. Can be provided directly or through referral.</div>
+  <div class="sa-cell ce">Full support network coordinated through referral technology. Every referral is tracked to completion. The organization ensures participants actually connect with services — not just get a phone number.</div>
+</div>
+
+<!-- 17 Financial Ed -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">17. Financial Education</div><div class="sa-meta"><span class="adopt">44% adopted</span><span class="owner">★ Trainer</span></div></div>
+  <div class="sa-cell ca">Not offered. No guidance on managing money, building credit, or financial planning.</div>
+  <div class="sa-cell cb">Offered occasionally but attendance isn't tracked. Content is informal.</div>
+  <div class="sa-cell cc">Financial education is offered with a structured curriculum. Attendance is documented.</div>
+  <div class="sa-cell cd">All participants are offered financial education covering budgeting, banking, credit, savings and benefits enrollment. Delivery can be coaching, workshops, or online.</div>
+  <div class="sa-cell ce">Comprehensive program with pre/post assessments. Covers budgeting, debt management, tax preparation, benefits navigation and planning for benefit cliffs.</div>
+</div>
+
+<!-- 18 Foundational -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">18. Foundational Skills Training</div><div class="sa-meta"><span class="adopt">68% adopted</span><span class="owner">★ Trainer</span></div></div>
+  <div class="sa-cell ca">Not offered. No structured training on workplace skills like communication, teamwork, or professionalism.</div>
+  <div class="sa-cell cb">Offered inconsistently with limited tracking. Content varies.</div>
+  <div class="sa-cell cc">Training is offered with a documented curriculum and completion data is tracked.</div>
+  <div class="sa-cell cd">Training is offered and informed by employer feedback — teaching the workplace skills local employers say matter most.</div>
+  <div class="sa-cell ce">Includes at least one course from the Skills to Succeed Academy — a proven curriculum that builds employability through real-world scenarios. Aligned with employer needs.</div>
+</div>
+
+<!-- 19 Digital Training -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">19. Digital Skills Training</div><div class="sa-meta"><span class="adopt">32% adopted</span><span class="owner">★ Trainer</span></div></div>
+  <div class="sa-cell ca">Not offered. No training on computer use, software, or online tools.</div>
+  <div class="sa-cell cb">Some digital skills training is offered but not aligned to a structured framework.</div>
+  <div class="sa-cell cc">Training follows the Goodwill Digital Career Accelerator (GDCA) framework — from basic computer use to advanced certifications.</div>
+  <div class="sa-cell cd">Follows GDCA framework, tailored to employer demand and individual needs. In-person, virtual, or through partners.</div>
+  <div class="sa-cell ce">Full GDCA implementation aligned to local labor market demand. Participants can progress from basic digital literacy to industry-recognized certifications.</div>
+</div>
+
+<!-- 20 Occ Training -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">20. Occupation-Specific Training</div><div class="sa-meta"><span class="adopt">51% adopted</span><span class="owner">★ Trainer</span></div></div>
+  <div class="sa-cell ca">Not offered. No technical or vocational training programs.</div>
+  <div class="sa-cell cb">Some programs aligned to demand but credential tracking is limited.</div>
+  <div class="sa-cell cc">Training is aligned with local labor market demand. Participants can earn industry-recognized credentials.</div>
+  <div class="sa-cell cd">Occupational training is aligned with employer input and local demand. Programs lead to credentials that employers trust.</div>
+  <div class="sa-cell ce">Training is co-created with employer partners and focused on living-wage occupations. Employers help design curricula and provide direct hiring pipelines.</div>
+</div>
+
+<!-- 21 Career Exploration -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">21. Career Exploration</div><div class="sa-meta"><span class="adopt">37% adopted</span><span class="owner">★ Program Coordinator</span></div></div>
+  <div class="sa-cell ca">Not offered. No hands-on opportunities to learn about different careers.</div>
+  <div class="sa-cell cb">Occasional activities like job fairs or tours, but limited and not consistently tracked.</div>
+  <div class="sa-cell cc">Hands-on career exploration is consistently offered — job shadowing, site tours, informational interviews, or VR simulations.</div>
+  <div class="sa-cell cd">Career exploration activities are offered and aligned with in-demand occupations in the local market.</div>
+  <div class="sa-cell ce">Full range of experiences — internships, pre-apprenticeships, apprenticeships, on-the-job training and learn-and-earn programs — all connected to living-wage careers.</div>
+</div>
+
+<!-- 22 Job Search -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">22. Job Search &amp; Prep</div><div class="sa-meta"><span class="adopt">92% adopted</span><span class="owner">★ Career Navigator</span></div></div>
+  <div class="sa-cell ca">Not offered. No help with resumes, interviews, or applications.</div>
+  <div class="sa-cell cb">Some help is available on an ad hoc basis, but it's not structured.</div>
+  <div class="sa-cell cc">Resume and interview preparation are offered as standard services.</div>
+  <div class="sa-cell cd">Comprehensive support including resume creation, mock interviews, application help and professional presentation guidance.</div>
+  <div class="sa-cell ce">Complete job readiness support — mock interviews, soft skills coaching, LinkedIn profile help, online application navigation and strategic guidance on disclosing barriers like criminal records or employment gaps.</div>
+</div>
+
+</div></details>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — LAUNCH CAREERS, STAY CONNECTED
+     ═══════════════════════════════════════════ -->
+<details class="section s-navy" id="sec4" open>
+<summary><span class="emoji">🚀</span> Launch Careers, Stay Connected — Launch &amp; Evaluate <span class="sec-sub">3 service areas</span></summary>
+<div class="inner">
+
+<!-- 23 Placement -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">23. Job Placement</div><div class="sa-meta"><span class="adopt">84% adopted</span><span class="owner">★ Business Engagement</span></div></div>
+  <div class="sa-cell ca">Not offered. No structured help connecting people to employers.</div>
+  <div class="sa-cell cb">Limited placement support. Some referrals happen but the process is informal.</div>
+  <div class="sa-cell cc">Job placement assistance is offered with documented processes.</div>
+  <div class="sa-cell cd">The organization actively engages employers and helps people secure jobs. Placement processes are formalized and outcomes are tracked.</div>
+  <div class="sa-cell ce">People are placed in jobs that meet or exceed the local living wage threshold (per MIT Living Wage Calculator). Employer partnerships provide direct hiring pipelines.</div>
+</div>
+
+<!-- 24 Retention -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">24. Retention Services</div><div class="sa-meta"><span class="adopt">69% adopted</span><span class="owner">★ Career Navigator</span></div></div>
+  <div class="sa-cell ca">No structured follow-up after someone gets a job.</div>
+  <div class="sa-cell cb">Follow-up happens at an irregular cadence. Some people are checked on, others aren't.</div>
+  <div class="sa-cell cc">Follow-up is becoming structured. The organization checks in with placed participants at regular intervals.</div>
+  <div class="sa-cell cd">Structured follow-up at 30, 60, 90 and 180 days. Staff identify problems early — transportation, workplace conflicts, childcare — and connect people to support before issues become job loss.</div>
+  <div class="sa-cell ce">Follow-up extends to 365 days. Staff provide crisis intervention, workplace coaching, benefits navigation and financial stability support throughout the full first year. Employer communication protocols allow early intervention.</div>
+</div>
+
+<!-- 25 Alumni -->
+<div class="sa-row">
+  <div class="sa-label"><div class="sa-name">25. Alumni Engagement</div><div class="sa-meta"><span class="adopt">12% adopted</span><span class="owner">★ Program Coordinator</span></div></div>
+  <div class="sa-cell ca">No alumni engagement. Once people complete the program, the connection ends.</div>
+  <div class="sa-cell cb">Informal engagement — occasional events or check-ins, but nothing structured.</div>
+  <div class="sa-cell cc">At least one formal method of alumni engagement is being developed or piloted.</div>
+  <div class="sa-cell cd">Not required at Gold level, but encouraged. Organizations that engage alumni report stronger outcomes and higher participant motivation.</div>
+  <div class="sa-cell ce">At least one formal alumni method established — networking, mentorship, advisory roles, continuing education, or career advancement support. Alumni serve as ambassadors and mentors.</div>
+</div>
+
+</div></details>
+
+<!-- ═══════════════════════════════════════════
+     ROLE CROSSWALK
+     ═══════════════════════════════════════════ -->
+<div class="cw-section" id="crosswalk">
+  <h2>📋 Who Owns What — Full Role Crosswalk</h2>
+  <div class="cw-sub">This crosswalk maps all 25 service areas to 8 functional roles. <strong>★ = Primary Owner</strong> (directly responsible) · <strong>◆ = Key Contributor</strong> (actively supports) · <strong>○ = Informed / Connected</strong> (receives or provides input). Every area must have a named primary owner — even if one person holds multiple roles.</div>
+  <div class="legend-row">
+    <span><span class="sym-p">★</span> Primary Owner</span>
+    <span><span class="sym-c">◆</span> Key Contributor</span>
+    <span><span class="sym-i">○</span> Informed</span>
+  </div>
+  <div class="cw-wrap">
+  <table class="cw-table">
+    <thead>
+      <tr>
+        <th>Service Area</th><th>Adopted</th><th>Mission Leader</th><th>Program Manager</th><th>Career Navigator</th><th>Bus. &amp; Comm. Engagement</th><th>Program Coordinator</th><th>Trainer</th><th>Data Specialist</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="group-row"><td colspan="9">🏗️ BUILD YOUR FOUNDATION</td></tr>
+      <tr><td>1. Functionally Aligned Staffing</td><td>77%</td><td class="sym-p">★</td><td class="sym-c">◆</td><td class="sym-i">○</td><td class="sym-i">○</td><td class="sym-i">○</td><td class="sym-i">○</td><td></td></tr>
+      <tr><td>2. Career Navigator Certification</td><td>32%</td><td class="sym-i">○</td><td class="sym-p">★</td><td class="sym-c">◆</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>3. OA Fellows Program</td><td>47%</td><td class="sym-p">★</td><td class="sym-c">◆</td><td></td><td></td><td class="sym-i">○</td><td></td><td></td></tr>
+      <tr><td>4. Referral Network &amp; Technology</td><td>25%</td><td></td><td class="sym-i">○</td><td></td><td class="sym-c">◆</td><td class="sym-i">○</td><td></td><td class="sym-p">★</td></tr>
+      <tr><td>5. Employer Partnerships</td><td>48%</td><td class="sym-c">◆</td><td class="sym-c">◆</td><td></td><td class="sym-p">★</td><td></td><td></td><td></td></tr>
+      <tr><td>6. Evaluating Impact &amp; Metrics</td><td>88%</td><td class="sym-i">○</td><td class="sym-c">◆</td><td></td><td></td><td></td><td></td><td class="sym-p">★</td></tr>
+   <thead>
+      <tr>
+        <th>Service Area</th><th>Adopted</th><th>Mission Leader</th><th>Program Manager</th><th>Career Navigator</th><th>Bus. &amp; Comm. Engagement</th><th>Program Coordinator</th><th>Trainer</th><th>Data Specialist</th>
+      </tr>
+    </thead>
+      <tr class="group-row"><td colspan="9">🔍 MEET PEOPLE WHERE THEY ARE</td></tr>
+      <tr><td>7. Outreach &amp; Recruitment</td><td>77%</td><td></td><td class="sym-i">○</td><td class="sym-i">○</td><td class="sym-p">★</td><td class="sym-c">◆</td><td></td><td></td></tr>
+      <tr><td>8. Registration &amp; Intake</td><td>90%</td><td></td><td class="sym-i">○</td><td class="sym-p">★</td><td></td><td class="sym-c">◆</td><td></td><td class="sym-i">○</td></tr>
+      <tr><td>9. Needs Assessment</td><td>64%</td><td></td><td class="sym-i">○</td><td class="sym-p">★</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>10. Basic Education Assessment</td><td>21%</td><td></td><td class="sym-i">○</td><td class="sym-p">★</td><td></td><td></td><td class="sym-c">◆</td><td></td></tr>
+      <tr><td>11. Career Readiness Assessment</td><td>46%</td><td></td><td class="sym-i">○</td><td class="sym-p">★</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>12. Digital Skills Assessment</td><td>28%</td><td></td><td class="sym-i">○</td><td class="sym-p">★</td><td></td><td></td><td class="sym-c">◆</td><td></td></tr>
+      <tr><td>13. Assessment Selection</td><td>56%</td><td></td><td class="sym-p">★</td><td class="sym-c">◆</td><td></td><td></td><td></td><td class="sym-i">○</td></tr>
+      <tr><td>14. Orientation</td><td>70%</td><td></td><td class="sym-i">○</td><td class="sym-c">◆</td><td></td><td class="sym-p">★</td><td></td><td></td></tr>
+      <tr><td>15. Individual Career &amp; Financial Plan</td><td>58%</td><td></td><td class="sym-i">○</td><td class="sym-p">★</td><td></td><td></td><td></td><td></td></tr>
+<thead>
+      <tr>
+        <th>Service Area</th><th>Adopted</th><th>Mission Leader</th><th>Program Manager</th><th>Career Navigator</th><th>Bus. &amp; Comm. Engagement</th><th>Program Coordinator</th><th>Trainer</th><th>Data Specialist</th>
+      </tr>
+    </thead>
+      <tr class="group-row"><td colspan="9">📚 DELIVER THE RIGHT SERVICES</td></tr>
+      <tr><td>16. Wraparound Support Services</td><td>92%</td><td></td><td class="sym-i">○</td><td class="sym-p">★</td><td></td><td class="sym-c">◆</td><td></td><td></td></tr>
+      <tr><td>17. Financial Education</td><td>44%</td><td></td><td class="sym-i">○</td><td class="sym-c">◆</td><td></td><td></td><td class="sym-p">★</td><td></td></tr>
+      <tr><td>18. Foundational Skills Training</td><td>68%</td><td></td><td class="sym-i">○</td><td class="sym-i">○</td><td></td><td></td><td class="sym-p">★</td><td></td></tr>
+      <tr><td>19. Digital Skills Training</td><td>32%</td><td></td><td class="sym-i">○</td><td></td><td></td><td></td><td class="sym-p">★</td><td class="sym-c">◆</td></tr>
+      <tr><td>20. Occupation-Specific Training</td><td>51%</td><td></td><td class="sym-i">○</td><td></td><td class="sym-c">◆</td><td></td><td class="sym-p">★</td><td></td></tr>
+      <tr><td>21. Career Exploration</td><td>37%</td><td></td><td class="sym-i">○</td><td class="sym-i">○</td><td class="sym-c">◆</td><td class="sym-p">★</td><td class="sym-c">◆</td><td></td></tr>
+      <tr><td>22. Job Search &amp; Prep</td><td>92%</td><td></td><td class="sym-i">○</td><td class="sym-p">★</td><td class="sym-i">○</td><td></td><td class="sym-c">◆</td><td></td></tr>
+<thead>
+      <tr>
+        <th>Service Area</th><th>Adopted</th><th>Mission Leader</th><th>Program Manager</th><th>Career Navigator</th><th>Bus. &amp; Comm. Engagement</th><th>Program Coordinator</th><th>Trainer</th><th>Data Specialist</th>
+      </tr>
+    </thead>
+      <tr class="group-row"><td colspan="9">🚀 LAUNCH CAREERS, STAY CONNECTED</td></tr>
+      <tr><td>23. Job Placement</td><td>84%</td><td></td><td class="sym-i">○</td><td class="sym-c">◆</td><td class="sym-p">★</td><td></td><td></td><td></td></tr>
+      <tr><td>24. Retention Services</td><td>69%</td><td></td><td class="sym-i">○</td><td class="sym-p">★</td><td></td><td></td><td></td><td class="sym-c">◆</td></tr>
+      <tr><td>25. Alumni Engagement</td><td>12%</td><td></td><td class="sym-i">○</td><td class="sym-c">◆</td><td class="sym-c">◆</td><td class="sym-p">★</td><td></td><td class="sym-i">○</td></tr>
+
+      <tr class="load-row"><td>ROLE LOAD</td><td></td><td>★2 ◆1 ○2</td><td>★2 ◆4 ○19</td><td>★9 ◆6 ○4</td><td>★3 ◆4 ○2</td><td>★3 ◆3 ○3</td><td>★4 ◆4 ○1</td><td>★2 ◆2 ○3</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  DRAFT — For Internal Discussion · May 2026 · Goodwill Industries International
+</footer>
+
+</div>
+
+</body>
+</html>

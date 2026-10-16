@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OA Adoption Process Flow for all OA Tiers</title>
+<style>
+  @page { size: landscape; margin: 0.4in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    background: #F4F6F8;
+    color: #222;
+    line-height: 1.5;
+    position: relative;
+    overflow-x: auto;
+  }
+  body::before {
+    content: "DRAFT";
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 160px;
+    font-weight: 900;
+    color: rgba(0, 75, 141, 0.06);
+    z-index: 0;
+    pointer-events: none;
+    letter-spacing: 30px;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .header { text-align: center; margin-bottom: 24px; }
+  .header h1 {
+    font-size: 28px; color: #004B8D; margin-bottom: 4px;
+    font-weight: 700; letter-spacing: -0.3px;
+  }
+  .how-to-read {
+    background: #E8F0FE; border-left: 5px solid #0072CE;
+    border-radius: 6px; padding: 14px 20px; margin-bottom: 26px;
+    font-size: 13.5px; color: #1a3a5c;
+  }
+  .how-to-read strong { color: #004B8D; }
+
+  .flow-grid {
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr 1fr 1fr 150px;
+    grid-template-rows: auto 1fr 1fr 1fr;
+    gap: 5px;
+  }
+
+  .phase-header {
+    background: #004B8D; color: #fff;
+    border-radius: 8px 8px 0 0; padding: 12px 10px 10px;
+    text-align: center;
+  }
+  .phase-header .phase-icon { font-size: 22px; display: block; margin-bottom: 3px; }
+  .phase-header .phase-title { font-size: 12px; font-weight: 700; line-height: 1.3; }
+  .phase-header .phase-num {
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.8px; opacity: 0.8; margin-bottom: 2px;
+  }
+  .corner-label {
+    display: flex; align-items: flex-end; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #004B8D;
+    padding-bottom: 8px; text-align: center;
+    grid-column: 1; grid-row: 1;
+  }
+  .dest-header {
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; font-size: 12px; font-weight: 700;
+    padding: 10px 6px; background: #004B8D; color: #fff;
+    border-radius: 8px 8px 0 0;
+    grid-column: 6; grid-row: 1;
+  }
+  .ph1h { grid-column: 2; grid-row: 1; }
+  .ph2h { grid-column: 3; grid-row: 1; }
+  .ph3h { grid-column: 4; grid-row: 1; }
+  .ph4h { grid-column: 5; grid-row: 1; }
+
+  .tier-label {
+    border-radius: 8px 0 0 8px; padding: 14px 10px;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center;
+    color: #fff; font-weight: 700; font-size: 13px; line-height: 1.3;
+  }
+  .tier-label .tier-sub { font-size: 10px; font-weight: 400; opacity: 0.85; margin-top: 3px; }
+  .t-prospect { background: #004B8D; grid-column: 1; grid-row: 2; }
+  .t-explore  { background: #0072CE; grid-column: 1; grid-row: 3; }
+  .t-partial  { background: #00897B; grid-column: 1; grid-row: 4; }
+
+  .cell {
+    border-radius: 4px; padding: 12px 11px;
+    font-size: 12px; line-height: 1.5;
+    min-height: 80px;
+  }
+  .cell.active {
+    background: #fff; border: 2px solid #D0DCE8;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .cell.inactive {
+    background: #ECEFF1; border: 2px dashed #CFD8DC;
+    display: flex; align-items: center; justify-content: center;
+    color: #90A4AE; font-size: 20px;
+  }
+  .cell ul { list-style: none; padding: 0; margin: 0; }
+  .cell ul li {
+    padding: 3px 0; padding-left: 16px; position: relative;
+    font-size: 11.5px; color: #333;
+  }
+  .cell ul li::before {
+    content: "▸"; position: absolute; left: 1px;
+    color: #0072CE; font-weight: bold;
+  }
+
+  /* Explicit grid placements */
+  .p1r2 { grid-column: 2; grid-row: 2; }
+  .p1r3 { grid-column: 2; grid-row: 3; }
+  .p1r4 { grid-column: 2; grid-row: 4; }
+  .p2m  { grid-column: 3; grid-row: 2 / 4; }
+  .p2r4 { grid-column: 3; grid-row: 4; }
+  .p3m  { grid-column: 4; grid-row: 2 / 5; }
+  .p4m  { grid-column: 5; grid-row: 2 / 5; }
+  .dm   { grid-column: 6; grid-row: 2 / 5; }
+
+  .dest-cell {
+    border-radius: 0 8px 8px 0; padding: 10px 8px;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; gap: 6px;
+    background: #FAFBFC; border: 2px solid #D0DCE8;
+  }
+  .dest-badge {
+    display: block; padding: 7px 10px; border-radius: 20px;
+    font-size: 10.5px; font-weight: 700; text-align: center;
+    line-height: 1.3; width: 100%;
+  }
+  .badge-gold {
+    background: linear-gradient(135deg, #F5E6A3, #C8A415);
+    color: #5A4800; border: 1px solid #B8960C;
+  }
+  .badge-platinum {
+    background: linear-gradient(135deg, #CFD8DC, #8C9DAB);
+    color: #2C3E50; border: 1px solid #7B8794;
+  }
+  .dest-sub { font-size: 9px; color: #666; font-style: italic; margin-top: -2px; }
+
+  .timeline-section { margin-top: 34px; }
+  .timeline-section h2 { font-size: 18px; color: #004B8D; margin-bottom: 12px; font-weight: 700; }
+  .timeline-table {
+    width: 100%; border-collapse: collapse; font-size: 13.5px;
+    background: #fff; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  }
+  .timeline-table th {
+    background: #004B8D; color: #fff; padding: 11px 16px;
+    text-align: center; font-weight: 600; font-size: 13px;
+  }
+  .timeline-table th:first-child { text-align: left; }
+  .timeline-table td { padding: 11px 16px; border-bottom: 1px solid #E8ECF0; text-align: center; }
+  .timeline-table td:first-child { text-align: left; font-weight: 600; color: #333; }
+  .timeline-table tr:last-child td { border-bottom: none; }
+  .timeline-table tr:hover { background: #F8FAFE; }
+  .time-gold { color: #7A5D00; font-weight: 600; }
+  .time-plat { color: #4A5C6A; font-weight: 600; }
+
+  .footer-note {
+    margin-top: 26px; text-align: center; font-size: 13px;
+    color: #777; font-style: italic; padding: 16px;
+    border-top: 1px solid #DDD;
+  }
+  @media print {
+    body { background: #fff; }
+    body::before { font-size: 120px; }
+    .container { padding: 10px; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>OA Adoption Process Flow for all OA Tiers</h1>
+  </div>
+
+  <div class="how-to-read">
+    <strong>How to read this chart:</strong> Every organization follows the same phases &mdash; they just <strong>enter at different points</strong> based on where they are today. Find your current OA adoption tier on the left and follow across to see which phases apply. All pathways lead to OA Gold or OA Platinum on the right.
+  </div>
+
+  <div class="flow-grid">
+
+    <!-- HEADER ROW -->
+    <div class="corner-label">Current OA<br>Adoption Tier</div>
+    <div class="phase-header ph1h">
+      <span class="phase-num">Phase 1</span>
+      <span class="phase-icon">&#x1F4CB;</span>
+      <span class="phase-title">Gain understanding<br>and buy-in</span>
+    </div>
+    <div class="phase-header ph2h">
+      <span class="phase-num">Phase 2</span>
+      <span class="phase-icon">&#x1F3AF;</span>
+      <span class="phase-title">Develop sense of urgency<br>and spark motivation</span>
+    </div>
+    <div class="phase-header ph3h">
+      <span class="phase-num">Phase 3</span>
+      <span class="phase-icon">&#x1F50D;</span>
+      <span class="phase-title">Discovery and<br>action planning</span>
+    </div>
+    <div class="phase-header ph4h">
+      <span class="phase-num">Phase 4</span>
+      <span class="phase-icon">&#x2705;</span>
+      <span class="phase-title">Implementation<br>and evaluation</span>
+    </div>
+    <div class="dest-header">Desired Future<br>OA Adoption Tier</div>
+
+    <!-- TIER LABELS -->
+    <div class="tier-label t-prospect">
+      Prospective
+      <span class="tier-sub">(Non-Adopter)</span>
+    </div>
+    <div class="tier-label t-explore">Exploring</div>
+    <div class="tier-label t-partial">
+      Progressing
+      <span class="tier-sub">(Partial Adopter)</span>
+    </div>
+
+    <!-- PHASE 1: Only Prospective is active -->
+    <div class="cell active p1r2">
+      <ul>
+        <li>Invite to webinars, listening sessions, and OA learning events</li>
+        <li>Hold brief introductory calls to understand barriers, demystify OA, and gauge readiness</li>
+        <li>Extend invitations to OA Fellows to spark early interest</li>
+        <li>Engage CEOs and mission leaders</li>
+      </ul>
+    </div>
+    <div class="cell inactive p1r3">&mdash;</div>
+    <div class="cell inactive p1r4">&mdash;</div>
+
+    <!-- PHASE 2: Merged Prospective + Exploring (rows 2-3) -->
+    <div class="cell active p2m">
+      <ul>
+        <li>Deliver an introductory consultation (what OA is, why it matters, and how to get started)</li>
+        <li>Determine the level of future 1:1 support needed</li>
+        <li>Invite to discovery opportunities (e.g., OA Fellows)</li>
+      </ul>
+    </div>
+    <div class="cell inactive p2r4">&mdash;</div>
+
+    <!-- PHASE 3: Merged all 3 tiers (rows 2-4) -->
+    <div class="cell active p3m">
+      <ul>
+        <li>Provide a structured 2-month advisory consultation focused on closing key gaps (readiness assessment)</li>
+        <li>Develop an OA Action Plan with clear next steps and follow-up cadence to ensure accountability for adoption</li>
+      </ul>
+    </div>
+
+    <!-- PHASE 4: Merged all 3 tiers (rows 2-4) -->
+    <div class="cell active p4m">
+      <ul>
+        <li>Execute OA Action Plan</li>
+        <li>Utilize Fidelity Monitoring tool to validate OA Gold / OA Platinum</li>
+        <li>Encourage expansion of OA practices across all programs</li>
+        <li>Identify targeted support to close gaps</li>
+      </ul>
+    </div>
+
+    <!-- DESTINATION: Merged all 3 tiers (rows 2-4) -->
+    <div class="dest-cell dm">
+      <span class="dest-badge badge-gold">OA Gold<br><small>(OA Essentials)</small></span>
+      <span class="dest-sub">OA Adoption (Fully Implemented)</span>
+      <span class="dest-badge badge-platinum">OA Platinum<br><small>(OA High-Fidelity)</small></span>
+      <span class="dest-sub">OA Adoption (Fully Implemented)</span>
+    </div>
+
+  </div>
+
+  <div class="timeline-section">
+    <h2>&#x23F1; Estimated Timelines by Pathway</h2>
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Pathway</th>
+          <th>Timeline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Non-Adopter to OA Gold</td><td class="time-gold">6-12 months</td></tr>
+        <tr><td>Non-Adopter to OA Platinum</td><td class="time-plat">6-18 months</td></tr>
+        <tr><td>Exploring to OA Gold</td><td class="time-gold">3-6 months</td></tr>
+        <tr><td>Exploring to OA Platinum</td><td class="time-plat">3-9 months</td></tr>
+        <tr><td>Partial Adopter to OA Gold</td><td class="time-gold">3-4 months</td></tr>
+        <tr><td>Partial Adopter to OA Platinum</td><td class="time-plat">3-5 months</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer-note">
+    All pathways lead to full OA adoption. The starting phase depends on the organization&#x27;s current level of OA engagement.
+  </div>
+
+</div>
+</body>
+</html>
